@@ -18,17 +18,17 @@ master_node_count=${master_node_count:-1}
 # Creating 6 nodes 
 echo "### Creating nodes ..."
 for c in $(seq 1 $((total_node_count))); do
-    echo "Creating node $prefix_node_name_$c with driver $driver"
-    docker-machine create -d $driver $prefix_node_name_$c
+    echo "Creating node $prefix_node_name$c with driver $driver"
+    docker-machine create -d $driver $prefix_node_name$c
 done
 
 # Get IP from leader node
-leader_ip=$(docker-machine ip $prefix_node_name_1)
+leader_ip=$(docker-machine ip $prefix_node_name1)
 echo "Leader node IP : $leader_ip"
 
 # Init Docker Swarm mode
 echo "### Initializing Swarm mode ..."
-eval $(docker-machine env prefix_node_name_1)
+eval $(docker-machine env prefix_node_name1)
 docker swarm init --advertise-addr $leader_ip
 
 # Swarm tokens
@@ -38,14 +38,14 @@ worker_token=$(docker swarm join-token worker -q)
 # Joinig manager nodes
 echo "### Joining manager $master_node_count modes ..."
 for c in $(seq 2 $((master_node_count))); do
-    eval $(docker-machine env $prefix_node_name_$c)
+    eval $(docker-machine env $prefix_node_name$c)
     docker swarm join --token $manager_token $leader_ip:2377
 done
 
 # Join worker nodes
 echo "### Joining worker modes ..."
 for c in $(seq $master_node_count $total_node_count); do
-    eval $(docker-machine env $prefix_node_name_$c)
+    eval $(docker-machine env $prefix_node_name$c)
     docker swarm join --token $worker_token $leader_ip:2377
 done
 
