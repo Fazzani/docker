@@ -6,11 +6,12 @@ read -p "Total nodes count (default=3)" -t 10 -i "3" total_node_count
 read -p "Driver (default=virtualbox)" -t 10 -i "virtualbox" driver
 read -p "Master node count (default=1)" -t 10 -i "1" master_node_count
 
-# # Creating 6 nodes 
-# echo "### Creating nodes ..."
-# for c in {1..$total_node_count} ; do
-#     docker-machine create -d $driver $prefix_node_name_$c
-# done
+# Creating 6 nodes 
+echo "### Creating nodes ..."
+for c in {1..$total_node_count} ; do
+    echo "Creating not $prefix_node_name_$c with driver $driver"
+    # docker-machine create -d $driver $prefix_node_name_$c
+done
 
 # # Get IP from leader node
 # leader_ip=$(docker-machine ip $prefix_node_name_$1)
@@ -41,3 +42,5 @@ read -p "Master node count (default=1)" -t 10 -i "1" master_node_count
 # # Clean Docker client environment
 # echo "### Cleaning Docker client environment ..."
 # eval $(docker-machine env -u)
+
+# exit 0
