@@ -8,7 +8,7 @@ read -p "Master node count (default=1)" -t 10 -i "1" master_node_count
 
 # Creating 6 nodes 
 echo "### Creating nodes ..."
-for c in {1..$total_node_count} ; do
+for c in $(seq 1 $((total_node_count))) ; do
     echo "Creating not $prefix_node_name_$c with driver $driver"
     # docker-machine create -d $driver $prefix_node_name_$c
 done
