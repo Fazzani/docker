@@ -1,10 +1,10 @@
 #!/bin/bash
 
 
-read -p "Prefix node name (default=node)" -t 10 -i "node_" prefix_node_name
-read -p "Total nodes count (default=3)" -t 10 -i "3" total_node_count
-read -p "Driver (default=virtualbox)" -t 10 -i "virtualbox" driver
-read -p "Master node count (default=1)" -t 10 -i "1" master_node_count
+read -p "Please enter Prefix node name (default=node)" -t 10 -i "node_" prefix_node_name
+read -p "Please enter Total nodes count (default=3)" -t 10 -i "3" total_node_count
+read -p "Please enter Driver (default=virtualbox)" -t 10 -i "virtualbox" driver
+read -p "Please enter Master node count (default=1)" -t 10 -i "1" master_node_count
 
 echo "prefix_node_name : $prefix_node_name"
 echo "total_node_count : $total_node_count"
