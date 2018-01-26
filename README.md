@@ -9,6 +9,7 @@
 2. Create Leader SWARM machine:
    - Create machine
      * <code>docker-machine create -d hyperv --hyperv-virtual-switch "Primary Virtual Switch" leader1</code>
+     
    - Init swarm
       * <code>docker-machine ssh</code>
       * <code>ip addr show (for getting the right IP address)</code>
