@@ -72,3 +72,6 @@
 ### [Service discovery CONSUL](https://blog.eleven-labs.com/fr/consul-service-discovery-failure-detection-2/)
 
 ### [Swarm consul Traeffic](http://blog.wescale.fr/2017/01/04/tutoriel-infastructure-resiliente-et-scalable-avec-swarm-consul-et-traefik/)
+
+### ERRORS : This machine has been allocated an IP address, but Docker Machine could not reach it successfully. SSH for the machine should still work, but connecting to exposed ports, such as the Docker daemon port
+  - sudo ifconfig vboxnet0 down && sudo ifconfig vboxnet0 up

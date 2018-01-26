@@ -1,0 +1,7 @@
+version: "3"
+
+services:
+  elastic:
+    image: elasticsearch:latest
+    security_opt:
+      - seccomp:unconfined
