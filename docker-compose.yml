@@ -67,7 +67,7 @@ services:
       - -Des.node.client=false
       - -Des.discovery.zen.ping.unicast.hosts=master02
       - -Des.discovery.zen.minimum_master_nodes=2
-      - -Des.network.host=_eth0_
+      - -Des.network.host=_eth1_
     ports:
       - "9210:9200"
     deploy:
