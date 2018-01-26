@@ -10,7 +10,7 @@ services:
       - -Des.node.master=false
       - -Des.node.data=false
       - -Des.discovery.zen.ping.unicast.hosts=master01,master02
-      - -Des.network.host=_eth0_
+      - -Des.network.host=_eth1_
     ports:
       - "9200:9200"
     deploy:
@@ -26,7 +26,7 @@ services:
       - -Des.node.name=data01
       - -Des.node.master=false
       - -Des.discovery.zen.ping.unicast.hosts=master01,master02
-      - -Des.network.host=_eth0_
+      - -Des.network.host=_eth1_
     ports:
       - "9201:9200"
     deploy:
@@ -42,7 +42,7 @@ services:
       - -Des.node.name=data02
       - -Des.node.master=false
       - -Des.discovery.zen.ping.unicast.hosts=master01,master02
-      - -Des.network.host=_eth0_
+      - -Des.network.host=_eth1_
     ports:
       - "9202:9200"
     deploy:
@@ -85,7 +85,7 @@ services:
       - -Des.node.client=false
       - -Des.discovery.zen.ping.unicast.hosts=master01
       - -Des.discovery.zen.minimum_master_nodes=2
-      - -Des.network.host=_eth0_
+      - -Des.network.host=_eth1_
     ports:
       - "9211:9200"
     deploy:
