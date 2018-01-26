@@ -3,8 +3,6 @@ version: "3"
 services:
   elasticsearch:
     image: elasticsearch:latest
-    security_opt:
-      - seccomp:unconfined
     container_name: elasticsearch
     command:
       - elasticsearch
@@ -23,8 +21,6 @@ services:
   data01:
     container_name: data01
     image: elasticsearch:latest
-    security_opt:
-      - seccomp:unconfined
     command:
       - elasticsearch
       - -Des.node.name=data01
@@ -41,8 +37,6 @@ services:
   data02:
     container_name: data02
     image: elasticsearch:latest
-    security_opt:
-      - seccomp:unconfined
     command:
       - elasticsearch
       - -Des.node.name=data02
@@ -66,8 +60,6 @@ services:
   master01:
     container_name: master01
     image: elasticsearch:latest
-    security_opt:
-      - seccomp:unconfined
     command:
       - elasticsearch
       - -Des.node.name=master01
@@ -86,8 +78,6 @@ services:
   master02:
     container_name: master02
     image: elasticsearch:latest
-    security_opt:
-      - seccomp:unconfined
     command:
       - elasticsearch
       - -Des.node.name=master02
