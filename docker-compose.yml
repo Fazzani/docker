@@ -125,7 +125,7 @@ services:
     container_name: visu
     image: dockersamples/visualizer:stable
     ports:
-      - "8090:8090"
+      - "8080:8080"
     volumes:
       - "/var/run/docker.sock:/var/run/docker.sock"
     deploy:
