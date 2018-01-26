@@ -28,7 +28,7 @@ echo "Leader node IP : $leader_ip"
 
 # Init Docker Swarm mode
 echo "### Initializing Swarm mode ..."
-eval $(docker-machine env prefix_node_name-1)
+eval $(docker-machine env $prefix_node_name-1)
 docker swarm init --advertise-addr $leader_ip
 
 # Swarm tokens
