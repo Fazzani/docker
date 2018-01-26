@@ -108,7 +108,7 @@ services:
       - elknet
   dockerbeat:
     container_name: dockerbeat
-    build: ingensi/dockerbeat
+    image: ingensi/dockerbeat
     environment:
       ELASTICSEARCH_HOST: elasticsearch
       ELASTICSEARCH_PORT: 9200
@@ -122,6 +122,7 @@ services:
     networks:
       - elknet
   visualizer:
+    container_name: visu
     image: dockersamples/visualizer:stable
     ports:
       - "8090:8090"
