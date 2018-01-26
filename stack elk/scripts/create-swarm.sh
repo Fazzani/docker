@@ -15,6 +15,8 @@ master_node_count=${master_node_count:-1}
 # echo "driver : $driver"
 # echo "master_node_count : $master_node_count"
 
+#--virtualbox-memory 512 --virtualbox-disk-size 2000 //2G
+
 # Creating 6 nodes 
 echo "### Creating nodes ..."
 for c in $(seq 1 $((total_node_count))); do
