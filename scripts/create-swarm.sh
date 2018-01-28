@@ -18,11 +18,12 @@ master_node_count=${master_node_count:-1}
 
 # --virtualbox virtualbox-memory 512 --virtualbox-disk-size 2000 //2G
 
-# Creating 6 nodes 
+# Creating n nodes 
 echo "### Creating nodes ..."
 for c in $(seq 1 $((total_node_count))); do
     echo "Creating node $prefix_node_name-$c with driver $driver"
-    docker-machine create -d $driver $prefix_node_name-$c --virtualbox-memory 512 --virtualbox-disk-size 2000 --swarm --swarm-discovery=$swarm_discovery --engine-opt="cluster-store=$swarm_discovery"
+    docker-machine create -d $driver $prefix_node_name-$c --virtualbox-memory 512 --virtualbox-disk-size 2000 --swarm --swarm-master --swarm-discovery=$swarm_discovery --engine-opt="cluster-advertise=eth1:2376"
+done
 
 # Get IP from leader node
 leader_ip=$(docker-machine ip $prefix_node_name-1)
