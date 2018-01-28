@@ -18,7 +18,7 @@ services:
     volumes:
       - .:/consul/data
   consul_agent_1:
-    container_name: "consul_agent1_${DOCKER_HOST}"
+    container_name: "consul_agent1"
     image: progrium/consul
     depends_on:
       - consul_server
@@ -35,7 +35,7 @@ services:
     volumes:
       - .:/consul/data
   consul_agent_2:
-    container_name: "consul_agent2_${DOCKER_HOST}"
+    container_name: "consul_agent2"
     image: progrium/consul
     depends_on:
       - consul_server
@@ -52,7 +52,7 @@ services:
     volumes:
       - .:/consul/data
   registrator:
-    container_name: "registrator_${DOCKER_HOST}"
+    container_name: "registrator"
     image: gliderlabs/registrator:master
     depends_on:
       - consul_server
