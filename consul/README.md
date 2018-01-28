@@ -35,3 +35,5 @@ Check the status of Consul's Key-Value Store HTTP API (should be empty at this p
 ## Refrences
 
 [consul-service-discovery-failure-detection-2](https://blog.eleven-labs.com/fr/consul-service-discovery-failure-detection-2/)
+[link2](http://blog.scottlogic.com/2016/06/17/docker-swarm.html)
+
