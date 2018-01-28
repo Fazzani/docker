@@ -21,4 +21,7 @@ Check the status of Consul's Key-Value Store HTTP API (should be empty at this p
 
 <code>curl http://localhost:8500/v1/agent/check/pass/service:http1</code>
 
+## ex with nginx web server and scaling web app
+[docker compose example file](https://github.com/yeasy/docker-compose-files/blob/master/consul-discovery/docker-compose.yml)
+
 

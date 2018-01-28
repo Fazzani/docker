@@ -1,7 +1,7 @@
 version: "3"
 
 services:
-  consul:
+  consul_server:
     image: progrium/consul
     container_name: consul
     restart: always
@@ -23,10 +23,19 @@ services:
       - "consul"
     restart: always
     ports:
+      - "8400:8400"
       - "8500:8500"
       - "8600:8600"
     environment:
       - CONSUL_BIND_INTERFACE=_eth0_
-    command: -server -ui-dir /ui -retry-join=consul:8301 -client=0.0.0.0
+    command: -server -ui-dir /ui join=consul_server
     volumes:
       - .:/consul/data
+  registrator:
+  image: gliderlabs/registrator:master
+  hostname: registrator
+  links:
+  - consulserver:consul
+  volumes:
+  - "/var/run/docker.sock:/tmp/docker.sock"
+  command: -internal consul://consul:8500
