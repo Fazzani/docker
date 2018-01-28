@@ -1,3 +1,5 @@
+ # Consul commands : 
+
  - With the Consul Server running, we can test Consul's Key-Value Store HTTP API:
 Check the status of Consul's Key-Value Store HTTP API (should be empty at this point):
 
@@ -11,6 +13,12 @@ Check the status of Consul's Key-Value Store HTTP API (should be empty at this p
 
 <code> curl "http://212.237.52.79:8500/v1/kv/msg1?raw"</code>
 
+- Consul nodes :
+
+<code>curl http://localhost:8500/v1/catalog/nodes</code>
+
 ## check agent
 
 <code>curl http://localhost:8500/v1/agent/check/pass/service:http1</code>
+
+
