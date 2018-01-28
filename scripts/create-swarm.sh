@@ -22,7 +22,7 @@ master_node_count=${master_node_count:-1}
 echo "### Creating nodes ..."
 for c in $(seq 1 $((total_node_count))); do
     echo "Creating node $prefix_node_name-$c with driver $driver"
-    docker-machine create -d $driver $prefix_node_name-$c --virtualbox-memory 512 --virtualbox-disk-size 2000
+    docker-machine create -d $driver $prefix_node_name-$c --virtualbox-memory 512 --virtualbox-disk-size 2000 --swarm --swarm-discovery=$swarm_discovery --engine-opt="cluster-store=$swarm_discovery"
 
 # Get IP from leader node
 leader_ip=$(docker-machine ip $prefix_node_name-1)
@@ -31,7 +31,7 @@ echo "Leader node IP : $leader_ip"
 # Init Docker Swarm mode
 echo "### Initializing Swarm mode ..."
 eval $(docker-machine env $prefix_node_name-1)
-docker swarm init --advertise-addr $leader_ip --swarm-discovery=$swarm_discovery --engine-opt="cluster-store=$swarm_discovery"
+docker swarm init --advertise-addr  $leader_ip
 done
 
 # Swarm tokens

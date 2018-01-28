@@ -28,6 +28,10 @@ Check the status of Consul's Key-Value Store HTTP API (should be empty at this p
 
 <code>curl http://212.237.52.79:8500/v1/catalog/services</code>
 
+## List nodes in the cluster with the following command:
+
+<code>docker run swarm list consul://$(docker-machine ip consul-machine):8500</code>
+
 ## Refrences
 
 [consul-service-discovery-failure-detection-2](https://blog.eleven-labs.com/fr/consul-service-discovery-failure-detection-2/)
