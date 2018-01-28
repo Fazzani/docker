@@ -23,9 +23,11 @@ services:
       - consul_server
     restart: always
     ports:
-      - "8400:8401"
-      - "8500:8501"
-      - "8600:8601"
+      - 8400:8401
+      - 8301:8311
+      - 8300:8310
+      - 8500:8501
+      - 8600:8601
     environment:
       - CONSUL_BIND_INTERFACE=_eth0_
     command: -server -ui-dir /ui join=consul_server
