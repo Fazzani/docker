@@ -23,7 +23,7 @@ services:
       placement:
         constraints:
           - "engine.labels.access == consul_seed"
-  consul:
+  consul_agent_1:
     image: progrium/consul
     container_name: consul_agent1
     depends_on:
