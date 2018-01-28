@@ -24,4 +24,10 @@ Check the status of Consul's Key-Value Store HTTP API (should be empty at this p
 ## ex with nginx web server and scaling web app
 [docker compose example file](https://github.com/yeasy/docker-compose-files/blob/master/consul-discovery/docker-compose.yml)
 
+## Services list
 
+<code>curl http://212.237.52.79:8500/v1/catalog/services</code>
+
+## Refrences
+
+[consul-service-discovery-failure-detection-2](https://blog.eleven-labs.com/fr/consul-service-discovery-failure-detection-2/)

@@ -1,5 +1,6 @@
 #!/bin/bash
 
+swarm_discovery="consul://http://212.237.52.79:8500"
 
 read -p "Please enter Prefix node name (default=node)" -t 10 prefix_node_name
 prefix_node_name=${prefix_node_name:-node_}
@@ -21,8 +22,7 @@ master_node_count=${master_node_count:-1}
 echo "### Creating nodes ..."
 for c in $(seq 1 $((total_node_count))); do
     echo "Creating node $prefix_node_name-$c with driver $driver"
-    docker-machine create -d $driver $prefix_node_name-$c
-done
+    docker-machine create -d $driver $prefix_node_name-$c 
 
 # Get IP from leader node
 leader_ip=$(docker-machine ip $prefix_node_name-1)
@@ -31,7 +31,8 @@ echo "Leader node IP : $leader_ip"
 # Init Docker Swarm mode
 echo "### Initializing Swarm mode ..."
 eval $(docker-machine env $prefix_node_name-1)
-docker swarm init --advertise-addr $leader_ip
+docker swarm init --advertise-addr $leader_ip --swarm-discovery=$swarm_discovery --engine-opt="cluster-store=$swarm_discovery"
+done
 
 # Swarm tokens
 manager_token=$(docker swarm join-token manager -q)
