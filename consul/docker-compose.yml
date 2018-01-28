@@ -33,7 +33,7 @@ services:
       - .:/consul/data
   registrator:
   image: gliderlabs/registrator:master
-  hostname: registrator
+  container_name: registrator
   depends_on: :
     - consul_server
   volumes:
