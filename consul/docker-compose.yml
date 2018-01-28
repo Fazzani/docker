@@ -20,7 +20,7 @@ services:
     image: progrium/consul
     container_name: consul_agent1
     depends_on:
-      - "consul"
+      - consul_server
     restart: always
     ports:
       - "8400:8400"
@@ -34,8 +34,8 @@ services:
   registrator:
   image: gliderlabs/registrator:master
   hostname: registrator
-  links:
-  - consulserver:consul
+  depends_on: :
+    - consul_server
   volumes:
   - "/var/run/docker.sock:/tmp/docker.sock"
   command: -internal consul://consul:8500
