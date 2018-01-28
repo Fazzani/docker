@@ -2,9 +2,8 @@ version: "3"
 
 services:
   consul_server:
-    name: consul_server_${DOCKER_HOST}
+    container_name: consul_${DOCKER_HOST}
     image: progrium/consul
-    container_name: consul
     restart: always
     network_mode: "host"
     ports:
@@ -20,9 +19,8 @@ services:
     volumes:
       - .:/consul/data
   consul_agent_1:
-    name: consul_agent_2_${DOCKER_HOST}
+    container_name: consul_agent1_${DOCKER_HOST}
     image: progrium/consul
-    container_name: consul_agent1
     depends_on:
       - consul_server
     restart: always
@@ -39,9 +37,8 @@ services:
     volumes:
       - .:/consul/data
   consul_agent_2:
-    name: consul_agent_2_${DOCKER_HOST}
+    container_name: consul_agent2_${DOCKER_HOST}
     image: progrium/consul
-    container_name: consul_agent2
     depends_on:
       - consul_server
     restart: always
@@ -58,9 +55,8 @@ services:
     volumes:
       - .:/consul/data
   registrator:
-    name: registrator_${DOCKER_HOST}
+    container_name: registrator_${DOCKER_HOST}
     image: gliderlabs/registrator:master
-    container_name: registrator
     depends_on:
       - consul_server
     network_mode: "host"
