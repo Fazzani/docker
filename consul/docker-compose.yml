@@ -6,6 +6,7 @@ services:
     image: progrium/consul
     container_name: consul
     restart: always
+    net: host
     ports:
       - 8500:8500
       - 8301:8301
