@@ -2,7 +2,7 @@ version: "3"
 
 services:
   consul_server:
-    container_name: "consul_${DOCKER_HOST}"
+    container_name: "consul_server"
     image: progrium/consul
     restart: always
     ports:
@@ -56,7 +56,7 @@ services:
     image: gliderlabs/registrator:master
     depends_on:
       - consul_server
-    network_mode: "host"
+    network_mode: host
     volumes:
       - "/var/run/docker.sock:/tmp/docker.sock"
-    command: -internal consul://consul:8500
+    command: -internal consul://conconsul_serversul:8500
