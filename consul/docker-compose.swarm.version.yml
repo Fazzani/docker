@@ -16,6 +16,13 @@ services:
     command: -server -bootstrap -ui-dir /ui
     volumes:
       - .:/consul/data
+    networks:
+      - "consul"
+    deploy:
+      replicas: 1
+      placement:
+        constraints:
+          - "engine.labels.access == consul_seed"
   consul_agent_1:
     image: progrium/consul
     container_name: consul_agent1
@@ -30,3 +37,13 @@ services:
     command: -server -ui-dir /ui -retry-join=consul:8301 -client=0.0.0.0
     volumes:
       - .:/consul/data
+    networks:
+      - "consul"
+    deploy:
+      mode: global                                      ##this will deploy to all nodes that
+      placement:
+        constraints:
+          - "engine.labels.access != consul_seed"
+networks:
+  consul:
+    driver: overlay
