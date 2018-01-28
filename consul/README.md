@@ -1,0 +1,16 @@
+ - With the Consul Server running, we can test Consul's Key-Value Store HTTP API:
+Check the status of Consul's Key-Value Store HTTP API (should be empty at this point):
+
+<code>curl "http://212.237.52.79:8500/v1/catalog/service/web"</code>
+
+- Create a test entry in Consul's Key-Value Store:
+
+<code>curl -X PUT -d 'this is a test' "http://212.237.52.79:8500/v1/kv/msg1"</code>
+
+- Retrieve your key value entry from Consul's HTTP API:
+
+<code> curl "http://212.237.52.79:8500/v1/kv/msg1?raw"</code>
+
+## check agent
+
+<code>curl http://localhost:8500/v1/agent/check/pass/service:http1</code>
