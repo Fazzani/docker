@@ -33,6 +33,23 @@ services:
     command: -server -ui-dir /ui join=consul_server
     volumes:
       - .:/consul/data
+  consul_agent_2:
+    image: progrium/consul
+    container_name: consul_agent2
+    depends_on:
+      - consul_server
+    restart: always
+    ports:
+      - 8402:8400
+      - 8312:8301
+      - 8313:8300
+      - 8502:8500
+      - 8602:8600
+    environment:
+      - CONSUL_BIND_INTERFACE=_eth0_
+    command: -server -ui-dir /ui join=consul_server
+    volumes:
+      - .:/cSonsul/data
   registrator:
     image: gliderlabs/registrator:master
     container_name: registrator
