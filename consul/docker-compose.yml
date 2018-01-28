@@ -2,6 +2,7 @@ version: "3"
 
 services:
   consul_server:
+    name: consul_server_${DOCKER_HOST}
     image: progrium/consul
     container_name: consul
     restart: always
@@ -18,6 +19,7 @@ services:
     volumes:
       - .:/consul/data
   consul_agent_1:
+    name: consul_agent_2_${DOCKER_HOST}
     image: progrium/consul
     container_name: consul_agent1
     depends_on:
@@ -29,12 +31,14 @@ services:
       - 8310:8300
       - 8501:8500
       - 8601:8600
+    net: host
     environment:
       - CONSUL_BIND_INTERFACE=_eth0_
     command: -server -ui-dir /ui join=consul_server
     volumes:
       - .:/consul/data
   consul_agent_2:
+    name: consul_agent_2_${DOCKER_HOST}
     image: progrium/consul
     container_name: consul_agent2
     depends_on:
@@ -46,16 +50,19 @@ services:
       - 8313:8300
       - 8502:8500
       - 8602:8600
+    net: host
     environment:
       - CONSUL_BIND_INTERFACE=_eth0_
     command: -server -ui-dir /ui join=consul_server
     volumes:
-      - .:/cSonsul/data
+      - .:/consul/data
   registrator:
+    name: registrator_${DOCKER_HOST}
     image: gliderlabs/registrator:master
     container_name: registrator
     depends_on:
       - consul_server
+    net: host
     volumes:
       - "/var/run/docker.sock:/tmp/docker.sock"
     command: -internal consul://consul:8500
