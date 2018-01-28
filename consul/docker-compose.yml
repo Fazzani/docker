@@ -32,10 +32,10 @@ services:
     volumes:
       - .:/consul/data
   registrator:
-  image: gliderlabs/registrator:master
-  container_name: registrator
-  depends_on: :
-    - consul_server
-  volumes:
-  - "/var/run/docker.sock:/tmp/docker.sock"
-  command: -internal consul://consul:8500
+    image: gliderlabs/registrator:master
+    container_name: registrator
+    depends_on:
+      - consul_server
+    volumes:
+      - "/var/run/docker.sock:/tmp/docker.sock"
+    command: -internal consul://consul:8500
