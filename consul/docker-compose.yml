@@ -5,7 +5,6 @@ services:
     container_name: "consul_${DOCKER_HOST}"
     image: progrium/consul
     restart: always
-    network_mode: "host"
     ports:
       - 8500:8500
       - 8301:8301
@@ -30,7 +29,6 @@ services:
       - 8310:8300
       - 8501:8500
       - 8601:8600
-    network_mode: "host"
     environment:
       - CONSUL_BIND_INTERFACE=_eth0_
     command: -server -ui-dir /ui join=consul_server
@@ -48,7 +46,6 @@ services:
       - 8313:8300
       - 8502:8500
       - 8602:8600
-    network_mode: "host"
     environment:
       - CONSUL_BIND_INTERFACE=_eth0_
     command: -server -ui-dir /ui join=consul_server
