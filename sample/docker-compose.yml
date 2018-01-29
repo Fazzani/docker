@@ -44,7 +44,23 @@ services:
       - overlayNet
     depends_on:
       - db
- 
+  # worker:
+  #   image: manomarks/examplevotingapp_worker
+  #   networks:
+  #     - frontend
+  #     - backend
+  #   deploy:
+  #     mode: replicated
+  #     replicas: 2
+  #     labels: [APP=VOTING]
+  #     restart_policy:
+  #       condition: on-failure
+  #       delay: 10s
+  #       max_attempts: 3
+  #       window: 120s
+  #     placement:
+  #       constraints: [node.role == worker]
+
   visualizer:
     image: dockersamples/visualizer:stable
     ports:
@@ -56,6 +72,15 @@ services:
         constraints: [node.role == manager]
     networks:
       -  overlayNet
+  
+  registrator:
+    image: gliderlabs/registrator:master
+    deploy:
+      mode: global
+    volumes:
+      - "/var/run/docker.sock:/tmp/docker.sock"
+    command: -internal consul://212.237.52.79:8500
+
 networks:
   overlayNet:
 volumes:

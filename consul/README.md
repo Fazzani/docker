@@ -43,3 +43,16 @@ docker swarm join --advertise=$(docker-machine ip swarm-2) consul://212.237.52.7
 [consul-service-discovery-failure-detection-2](https://blog.eleven-labs.com/fr/consul-service-discovery-failure-detection-2/)
 [link2](http://blog.scottlogic.com/2016/06/17/docker-swarm.html)
 
+### Example Sample:
+
+ - (link)[https://codefresh.io/howtos/deploy-docker-compose-v3-swarm-mode-cluster/]
+ - (link 2)[https://docs.docker.com/datacenter/ucp/2.2/guides/user/services/#deploy-the-voting-application]
+
+eval $(docker-machine env swarm-1)
+docker network create --driver overlay --subnet 10.0.9.0/24 --gateway 10.0.9.99 overlayNet
+
+docker stack deploy --compose-file docker-compose.yml vote_app_stack
+
+leader_ip=$(docker-machine ip swarm-1)
+eval $(docker-machine env swarm-3)
+docker swarm join --token $worker_join $leader_ip:2377
