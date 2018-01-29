@@ -7,7 +7,7 @@
      * Docker machine creation
        * <code>docker-machine create -d hyperv --hyperv-virtual-switch "Primary Virtual Switch" worker1</code>
 2. Create Leader SWARM machine:
-   - Create machine
+   - Create   
      * <code>docker-machine create -d hyperv --hyperv-virtual-switch "Primary Virtual Switch" leader1</code>
      
    - Init swarm
@@ -58,6 +58,8 @@
 # Various
 
 ### Certif problem and ssh unavailable
+
+   <code>rm -R ~/.docker</code>
    <code>docker-machine --debug regenerate-certs -f worker1</code>
 
 ### Machine environment
