@@ -46,7 +46,6 @@ services:
       - db
  
   visualizer:
-    container_name: visu
     image: dockersamples/visualizer:stable
     ports:
       - "8080:8080"
