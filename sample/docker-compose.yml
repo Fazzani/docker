@@ -98,4 +98,6 @@ services:
     networks:
       -  overlayNet
 networks:
-   overlayNet:
+  overlayNet:
+volumes:
+  db-data:
