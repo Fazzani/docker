@@ -2,6 +2,7 @@ version: "3"
 
 services:
   proxy:
+    container_name: traefik
     image: traefik
     networks:
       - traefik
@@ -21,6 +22,7 @@ services:
       - "traefik.frontend.entryPoints=http,https"
 
   portainer:
+    container_name: portainer
     image: portainer/portainer
     networks:
       - traefik
