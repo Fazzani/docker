@@ -17,40 +17,40 @@ services:
     command: -server -bootstrap -ui-dir /ui
     volumes:
       - .:/consul/data
-  consul_agent_1:
-    container_name: "consul_agent1"
-    image: progrium/consul
-    depends_on:
-      - consul_server
-    restart: always
-    ports:
-      - 8401:8400
-      - 8311:8301
-      - 8310:8300
-      - 8501:8500
-      - 8601:8600
-    environment:
-      - CONSUL_BIND_INTERFACE=_eth0_
-    command: -server -ui-dir /ui join=consul_server
-    volumes:
-      - .:/consul/data
-  consul_agent_2:
-    container_name: "consul_agent2"
-    image: progrium/consul
-    depends_on:
-      - consul_server
-    restart: always
-    ports:
-      - 8402:8400
-      - 8312:8301
-      - 8313:8300
-      - 8502:8500
-      - 8602:8600
-    environment:
-      - CONSUL_BIND_INTERFACE=_eth0_
-    command: -server -ui-dir /ui join=consul_server
-    volumes:
-      - .:/consul/data
+  # consul_agent_1:
+  #   container_name: "consul_agent1"
+  #   image: progrium/consul
+  #   depends_on:
+  #     - consul_server
+  #   restart: always
+  #   ports:
+  #     - 8401:8400
+  #     - 8311:8301
+  #     - 8310:8300
+  #     - 8501:8500
+  #     - 8601:8600
+  #   environment:
+  #     - CONSUL_BIND_INTERFACE=_eth0_
+  #   command: -server -ui-dir /ui join=consul_server
+  #   volumes:
+  #     - .:/consul/data
+  # consul_agent_2:
+  #   container_name: "consul_agent2"
+  #   image: progrium/consul
+  #   depends_on:
+  #     - consul_server
+  #   restart: always
+  #   ports:
+  #     - 8402:8400
+  #     - 8312:8301
+  #     - 8313:8300
+  #     - 8502:8500
+  #     - 8602:8600
+  #   environment:
+  #     - CONSUL_BIND_INTERFACE=_eth0_
+  #   command: -server -ui-dir /ui join=consul_server
+  #   volumes:
+  #     - .:/consul/data
   registrator:
     container_name: "registrator"
     image: gliderlabs/registrator:master
