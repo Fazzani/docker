@@ -14,7 +14,7 @@ defaultEntryPoints = ["http", "https"]
   address = ":443"
     [entryPoints.https.tls]
 
-[acme] // 3
+[acme]
 email = "heni.fazzani@seloger.com"
 storageFile = "/etc/traefik/acme/acme.json"
 entryPoint = "https"
