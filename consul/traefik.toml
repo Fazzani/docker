@@ -31,7 +31,7 @@ onDemand = true
 [web]
 address = ":8080"
 [web.auth.basic]
-  users = ["pab:$apr1$2ZtdZCue$BHq00nxavh6EFmR9OFAfZ1"]
+  users = ["heni:cd07a63af5f14ac0d51b5bbbf6e93ae9", "admin":"21232f297a57a5a743894a0e4a801fc3"]
 
 [docker]
 endpoint = "unix:///var/run/docker.sock"
