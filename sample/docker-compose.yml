@@ -49,8 +49,8 @@ services:
     image: gaiadocker/example-voting-app-worker:latest
     networks:
       overlayNet:
-        aliases:
-          - workers
+        # aliases:
+        #   - workers
     depends_on:
       - db
       - redis
