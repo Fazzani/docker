@@ -6,7 +6,7 @@ services:
     ports:
       - "6379"
     networks:
-      - voteapp
+      - overlayNet
     deploy:
       placement:
         constraints: [node.role == manager]
@@ -16,7 +16,7 @@ services:
     volumes:
       - db-data:/var/lib/postgresql/data
     networks:
-      - voteapp
+      - overlayNet
     deploy:
       placement:
         constraints: [node.role == manager]
@@ -26,7 +26,7 @@ services:
     ports:
       - 5000:80
     networks:
-      - voteapp
+      - overlayNet
     depends_on:
       - redis
     deploy:
@@ -41,14 +41,14 @@ services:
     ports:
       - 5001:80
     networks:
-      - voteapp
+      - overlayNet
     depends_on:
       - db
  
   worker:
     image: gaiadocker/example-voting-app-worker:latest
     networks:
-      voteapp:
+      overlayNet:
         aliases:
           - workers
     depends_on:
