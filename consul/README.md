@@ -32,6 +32,12 @@ Check the status of Consul's Key-Value Store HTTP API (should be empty at this p
 
 <code>docker run swarm list consul://$(docker-machine ip consul-machine):8500</code>
 
+## join consul from distant nodes:
+
+<code>eval $(docker-machine env swarm-2)  &&
+docker swarm join --advertise=$(docker-machine ip swarm-2) consul://212.237.52.79:8500
+</code>
+
 ## Refrences
 
 [consul-service-discovery-failure-detection-2](https://blog.eleven-labs.com/fr/consul-service-discovery-failure-detection-2/)
