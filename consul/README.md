@@ -56,3 +56,9 @@ docker stack deploy --compose-file docker-compose.yml vote_app_stack
 leader_ip=$(docker-machine ip swarm-1)
 eval $(docker-machine env swarm-3)
 docker swarm join --token $worker_join $leader_ip:2377
+
+### Liens utils
+
+[cluster-docker-consul-traefik](https://docs.traefik.io/user-guide/cluster-docker-consul)
+[DOCKER REMOTE API : PILOTER UN HÔTE DOCKER À DISTANCE](http://blog.inovia-conseil.fr/?p=215)
+[Un bon lien pour faire des tests avec le LB Kota<oda](https://www.katacoda.com/courses/docker-orchestration/load-balance-service-discovery-swarm-mode)
