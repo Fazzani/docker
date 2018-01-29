@@ -3,9 +3,9 @@
 # Global configuration
 ################################################################
 
-defaultEntryPoints = ["http", "https"] // 1
+defaultEntryPoints = ["http", "https"]
 
-[entryPoints] // 2
+[entryPoints]
   [entryPoints.http]
   address = ":80"
     [entryPoints.http.redirect]
@@ -15,13 +15,13 @@ defaultEntryPoints = ["http", "https"] // 1
     [entryPoints.https.tls]
 
 [acme] // 3
-email = "xxx@xx.com"
+email = "heni.fazzani@seloger.com"
 storageFile = "/etc/traefik/acme/acme.json"
 entryPoint = "https"
 OnHostRule = true
 onDemand = true
 
-[[acme.domains]] //
+[[acme.domains]]
   main = "cab.re"
   sans = ["portainer.cab.re", "traefik.cab.re", "gitlab.cab.re"] 
 
