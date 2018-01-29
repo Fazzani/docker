@@ -72,7 +72,12 @@ services:
         constraints: [node.role == manager]
     networks:
       -  overlayNet
-  
+  portainer:
+  image: portainer/portainer
+  container_name: "portainer-app"
+  command: --templates http://templates/templates.json -d /data -H tcp://<DOCKER_HOST>:<DOCKER_PORT>
+  networks:
+    - local
   registrator:
     image: gliderlabs/registrator:master
     deploy:
