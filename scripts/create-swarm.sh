@@ -53,6 +53,11 @@ for c in $(seq $master_node_count $total_node_count); do
     docker swarm join --token $worker_token $leader_ip:2377
 done
 
+# show swarm cluster
+printf "\nLocal Swarm Cluster\n===================\n"
+eval $(docker-machine env $prefix_node_name-1)
+docker node ls
+
 # Clean Docker client environment
 echo "### Cleaning Docker client environment ..."
 eval $(docker-machine env -u)
