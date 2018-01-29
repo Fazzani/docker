@@ -27,7 +27,7 @@ services:
     networks:
       - traefik
     labels:
-      - "traefik.frontend.rule=Host:portainer.synker.ovh"
+      - "traefik.frontend.rule=Host:portainer-ovh2.synker.ovh"
       - "traefik.port=9000"
       - "traefik.backend=portainer"
       - "traefik.frontend.entryPoints=http,https"
