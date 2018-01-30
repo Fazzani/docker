@@ -1,0 +1,62 @@
+version: "3"
+
+services:
+  proxy:
+    container_name: traefik
+    image: traefik
+    networks:
+      - traefik
+    ports:
+      - 80:80
+      - 8080:8080
+      - 443:443
+    volumes:
+      - "$PWD/traefik.toml:/etc/traefik/traefik.toml"
+      - "$PWD/acme:/etc/traefik/acme"
+      - /var/run/docker.sock:/var/run/docker.sock
+    restart: unless-stopped
+    labels:
+      - "traefik.frontend.rule=Host:traefik-ovh2.synker.ovh"
+      - "traefik.port=8080"
+      - "traefik.backend=traefik"
+      - "traefik.frontend.entryPoints=http,https"
+
+  portainer:
+    container_name: rancher
+    image: rancher/server
+    networks:
+      - traefik
+    ports:
+      - 8080:8080
+    volumes:
+        - .:/var/lib/mysql
+    restart: unless-stopped
+
+  consul_server:
+    container_name: "consul_server"
+    image: progrium/consul
+    restart: always
+    ports:
+      - 8500:8500
+      - 8301:8301
+      - 8300:8300
+      - 8600:8600
+    environment:
+      - 'CONSUL_LOCAL_CONFIG={"skip_leave_on_interrupt": true, "server":true, "enable_debug":true, \"disable_update_check\": true}'
+      - CONSUL_CLIENT_INTERFACE=_eth0_
+      - CONSUL_BIND_INTERFACE=_eth0_
+    command: -server -bootstrap -ui-dir /ui
+    volumes:
+      - .:/consul/data
+
+  registrator:
+    container_name: "registrator"
+    image: gliderlabs/registrator:master
+    depends_on:
+      - consul_server
+    volumes:
+      - "/var/run/docker.sock:/tmp/docker.sock"
+    command: -internal consul://consul_server:8500
+networks:
+  traefik:
+    external: true

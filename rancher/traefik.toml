@@ -1,0 +1,40 @@
+# traefik.toml
+################################################################
+# Global configuration
+################################################################
+
+defaultEntryPoints = ["http", "https"]
+
+[entryPoints]
+  [entryPoints.http]
+  address = ":80"
+ #   [entryPoints.http.redirect]
+ #   entryPoint = "https"
+  [entryPoints.https]
+  address = ":443"
+    [entryPoints.https.tls]
+
+[acme]
+email = "heni.fazzani@seloger.com"
+storageFile = "/etc/traefik/acme/acme.json"
+entryPoint = "https"
+OnHostRule = true
+onDemand = true
+
+[[acme.domains]]
+  main = "synker.ovh"
+  sans = ["portainer-ovh2.synker.ovh", "traefik-ovh2.synker.ovh"] 
+
+[[acme.domains]]
+  main = "test.synker.ovh"
+
+[web]
+address = ":8080"
+[web.auth.basic]
+  users = ["admin:$apr1$WhOEyAtC$/EFrhjPjqHGkY9Ex5fEo01", "heni:$apr1$uEwx3Ssf$0XDcr9Sohz0XxlFFJzjft0"]
+
+[docker]
+endpoint = "unix:///var/run/docker.sock"
+domain = "synker.ovh"
+watch = true
+exposedbydefault = true
