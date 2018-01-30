@@ -55,6 +55,27 @@
    - Bring the docker Engine out of swarm mode
       * docker swarm leave --force
 
+# Docker Networking
+
+### Virtual IP address 
+<p>Now, if another service or discrete container wanted to consume the nginx service, how will it address the service?</p>
+<p>Swarm has this covered, and allocates each service that gets created a virtual IP address through which it can be addressed. If we inspect the nginx service, we can see the virtual IP address:</p>
+<code>$ docker service inspect --format '{{json .Endpoint.VirtualIPs}}' nginx | jq '.'
+[
+  {
+    "NetworkID": "4pnw0biwjbns0bjg4ey6cepri",
+    "Addr": "192.168.35.2/24"
+  }
+]</code>
+
+**La communication inter-services doit être faite par les ip virtuelles**
+
+### Embedded DNS Server
+
+<p>Each Docker engine runs an embedded DNS server, which can be queried by processes running in containers on a specific Docker host, provided that the containers are attached to user-defined networks (i.e. Note: not the default bridge network, called bridge). Container and Swarm service names can be resolved using the embedded DNS server, provided the query comes from a container attached to the same network as the container or service being looked up</p>
+
+<p>In our scenario, we can use the service name, nginx, instead of the virtual IP address, to consume the service. The name will be resolved to the virtual IP address, and the service request will be routed to one of the task containers running in the cluster. </p>
+
 # Various
 
 ### Certif problem and ssh unavailable
