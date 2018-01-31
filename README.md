@@ -98,3 +98,13 @@
 
 ### ERRORS : This machine has been allocated an IP address, but Docker Machine could not reach it successfully. SSH for the machine should still work, but connecting to exposed ports, such as the Docker daemon port
   - sudo ifconfig vboxnet0 down && sudo ifconfig vboxnet0 up
+
+
+
+<p>Before Docker 1.12, setting up and deploying a cluster of Docker hosts required you to use an external key-value store like etcd or Consul for service discovery. With Docker 1.12, however, an external discovery service is no longer necessary, since Docker comes with an in-memory key-value store that works out of the box</p>
+
+### Add a host without a driver
+
+You can register an already existing docker host by passing the daemon url. With that, you can have the same workflow as on a host provisioned by docker-machine.
+
+<code>$ docker-machine create --driver none --url=tcp://50.134.234.20:2376 custombox</code>
