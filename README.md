@@ -114,5 +114,10 @@ Linux hosts use a kernel module called iptables to manage access to network devi
 ### Container communication between hosts
 For security reasons, Docker configures the iptables rules to prevent containers from forwarding traffic from outside the host machine, on Linux hosts. Docker sets the default policy of the FORWARD chain to DROP.
 
+### Weave Net network driver
+
+Weave Net creates a virtual network that connects Docker containers across multiple hosts and enables their automatic discovery. With Weave Net, portable microservices-based applications consisting of multiple containers can run anywhere: on one host, multiple hosts or even across cloud providers and data centers.
+[overview](https://www.weave.works/docs/net/latest/overview/)
+
 ***
 ```La communication inter-services doit être faite par les ip virtuelles```
