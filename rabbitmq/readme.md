@@ -1,4 +1,4 @@
-# RabbitMQ + HaProxy
+# RabbitMQ borker and HaProxy as LB and reverse proxy
 
 ## Docker compose RabbitMQ configuration
 
