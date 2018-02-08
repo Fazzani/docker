@@ -103,13 +103,16 @@ Linux hosts use a kernel module called iptables to manage access to network devi
 ### Virtual IP address 
 <p>Now, if another service or discrete container wanted to consume the nginx service, how will it address the service?</p>
 <p>Swarm has this covered, and allocates each service that gets created a virtual IP address through which it can be addressed. If we inspect the nginx service, we can see the virtual IP address:</p>
-<code>$ docker service inspect --format '{{json .Endpoint.VirtualIPs}}' nginx | jq '.'
+
+```bash
+$ docker service inspect --format '{{json .Endpoint.VirtualIPs}}' nginx | jq '.'
 [
   {
     "NetworkID": "4pnw0biwjbns0bjg4ey6cepri",
     "Addr": "192.168.35.2/24"
   }
-]</code>
+]
+```
 
 ### Container communication between hosts
 For security reasons, Docker configures the iptables rules to prevent containers from forwarding traffic from outside the host machine, on Linux hosts. Docker sets the default policy of the FORWARD chain to DROP.
@@ -119,5 +122,7 @@ For security reasons, Docker configures the iptables rules to prevent containers
 Weave Net creates a virtual network that connects Docker containers across multiple hosts and enables their automatic discovery. With Weave Net, portable microservices-based applications consisting of multiple containers can run anywhere: on one host, multiple hosts or even across cloud providers and data centers.
 [overview](https://www.weave.works/docs/net/latest/overview/)
 
-***
-```La communication inter-services doit être faite par les ip virtuelles```
+---
+**NOTE** La communication inter-services doit être faite par les ip virtuelles
+
+[Tech Stack Objectif](https://photos.google.com/share/AF1QipP1B1WxYtSq3OIQRv4feZPlY7XNSlfAiro4zqG9unsixIBqJrPVhnAB3JjT2YYxuQ?key=Z0M4TFRLM1lOVmZiZkpuTEJnNHVJT2tEWlVOSWRB)
