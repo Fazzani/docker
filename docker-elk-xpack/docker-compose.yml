@@ -18,8 +18,8 @@ services:
         constraints:
           - node.role == worker
           - label.provider == ovh
-        networks:
-          - elknet
+    networks:
+      - elknet
 
   logstash:
     build:
