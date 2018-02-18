@@ -43,6 +43,7 @@ services:
       test: wget -qO- http://localhost:5601 > /dev/null
       interval: 30s
       retries: 3
+
   logstash:
     hostname: logstash
     command: sh -c "logstash -e 'input { syslog  { type => syslog port => 10514   } gelf { } } output { stdout { codec => rubydebug } elasticsearch { hosts => [ \"elasticsearch\" ] } }'"
@@ -58,7 +59,8 @@ services:
       replicas: 2
       placement:
         constraints: 
-          - node.labels.size == ovh
+          - node.labels.provider == ovh
+
   visualizer:
     image: dockersamples/visualizer:stable
     ports:
