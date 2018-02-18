@@ -24,7 +24,7 @@ services:
       placement:
         constraints: 
           - node.role == worker
-          - label.size == large
+          - node.labels.size == large
   kibana:
     image: kibana:latest
     ports:
@@ -39,7 +39,7 @@ services:
       placement:
         constraints: 
           - node.role == worker
-          - label.size == medium
+          - node.labels.size == medium
     healthcheck:
       test: wget -qO- http://localhost:5601 > /dev/null
       interval: 30s
@@ -60,7 +60,7 @@ services:
       placement:
         constraints: 
           - node.role == worker
-          - label.size == ovh
+          - node.labels.size == ovh
   visualizer:
     image: dockersamples/visualizer:stable
     ports:
