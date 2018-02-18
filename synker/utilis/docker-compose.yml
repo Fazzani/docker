@@ -1,0 +1,166 @@
+version: "3"
+
+services:
+  elasticsearch:
+    image: elasticsearch:latest
+    container_name: elasticsearch
+    command:
+      - elasticsearch
+      - -Des.node.name=elasticsearch
+      - -Des.node.master=false
+      - -Des.node.data=false
+      - -Des.discovery.zen.ping.unicast.hosts=master01,master02
+      - -Des.network.host=_eth1_
+    ports:
+      - "9200:9200"
+    deploy:
+      placement:
+        constraints: [node.role == worker]
+    networks:
+      - elknet
+  data01:
+    container_name: data01
+    image: elasticsearch:latest
+    command:
+      - elasticsearch
+      - -Des.node.name=data01
+      - -Des.node.master=false
+      - -Des.discovery.zen.ping.unicast.hosts=master01,master02
+      - -Des.network.host=_eth1_
+    ports:
+      - "9201:9200"
+    deploy:
+      placement:
+        constraints: [node.role == worker]
+    networks:
+      - elknet
+  data02:
+    container_name: data02
+    image: elasticsearch:latest
+    command:
+      - elasticsearch
+      - -Des.node.name=data02
+      - -Des.node.master=false
+      - -Des.discovery.zen.ping.unicast.hosts=master01,master02
+      - -Des.network.host=_eth1_
+    ports:
+      - "9202:9200"
+    deploy:
+      replicas: 2
+      restart_policy:
+        condition: on-failure
+      resources:
+        limits:
+          cpus: "0.1"
+          memory: 50M
+      placement:
+        constraints: [node.role == worker]
+    networks:
+      - elknet
+  master01:
+    container_name: master01
+    image: elasticsearch:latest
+    command:
+      - elasticsearch
+      - -Des.node.name=master01
+      - -Des.node.data=false
+      - -Des.node.client=false
+      - -Des.discovery.zen.ping.unicast.hosts=master02
+      - -Des.discovery.zen.minimum_master_nodes=2
+      - -Des.network.host=_eth1_
+    ports:
+      - "9210:9200"
+    deploy:
+      placement:
+        constraints: [node.role == worker]
+    networks:
+      - elknet
+  master02:
+    container_name: master02
+    image: elasticsearch:latest
+    command:
+      - elasticsearch
+      - -Des.node.name=master02
+      - -Des.node.data=false
+      - -Des.node.client=false
+      - -Des.discovery.zen.ping.unicast.hosts=master01
+      - -Des.discovery.zen.minimum_master_nodes=2
+      - -Des.network.host=_eth1_
+    ports:
+      - "9211:9200"
+    deploy:
+      placement:
+        constraints: [node.role == worker]
+    networks:
+      - elknet
+  kibana:
+    image: kibana:latest
+    container_name: kibana
+    command: kibana --elasticsearch 'http://elasticsearch:9200'
+    depends_on:
+      - elasticsearch
+    ports:
+      - "5601:5601"
+    deploy:
+      placement:
+        constraints: [node.role == worker]
+    networks:
+      - elknet
+
+  rabbitmq1:
+    image: rabbitmq:3-management
+    hostname: rabbitmq1
+    environment:
+      - RABBITMQ_ERLANG_COOKIE=${RABBITMQ_ERLANG_COOKIE}
+      - RABBITMQ_DEFAULT_USER=${RABBITMQ_DEFAULT_USER}
+      - RABBITMQ_DEFAULT_PASS=${RABBITMQ_DEFAULT_PASS}
+      - RABBITMQ_DEFAULT_VHOST=${RABBITMQ_DEFAULT_VHOST}
+
+  rabbitmq2:
+    image: rabbitmq:3-management
+    hostname: rabbitmq2
+    depends_on:
+      - rabbitmq1
+    environment:
+      - RABBITMQ_ERLANG_COOKIE=${RABBITMQ_ERLANG_COOKIE}
+    volumes:
+      - ./cluster-entrypoint.sh:/usr/local/bin/cluster-entrypoint.sh
+    entrypoint: /usr/local/bin/cluster-entrypoint.sh
+    
+  proxy:
+    container_name: traefik
+    image: traefik
+    networks:
+      - traefik
+    ports:
+      - 80:80
+      - 8080:8080
+      - 443:443
+      - 15672:15672
+      - 5672:5672
+    volumes:
+      - "$PWD/traefik.toml:/etc/traefik/traefik.toml"
+      - "$PWD/acme:/etc/traefik/acme"
+      - /var/run/docker.sock:/var/run/docker.sock
+    restart: unless-stopped
+    labels:
+      - "traefik.frontend.rule=Host:traefik-ovh2.synker.ovh"
+      - "traefik.port=8080"
+      - "traefik.backend=traefik"
+      - "traefik.frontend.entryPoints=http,https"
+
+  rancher:
+    container_name: rancher
+    image: rancher/server:stable
+    networks:
+      - traefik
+    ports:
+      - 8090:8080
+    volumes:
+      - .:/var/lib/mysql
+    restart: unless-stopped
+  
+networks:
+  traefik:
+    external: true
+  elknet:
