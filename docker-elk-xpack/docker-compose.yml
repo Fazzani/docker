@@ -4,7 +4,7 @@ services:
 
   elasticsearch:
     build:
-      context: elasticsearch/
+      context: ./elasticsearch
     volumes:
       - ./elasticsearch/config/elasticsearch.yml:/usr/share/elasticsearch/config/elasticsearch.yml:ro
     ports:
@@ -23,7 +23,7 @@ services:
 
   logstash:
     build:
-      context: logstash/
+      context: ./logstash
     volumes:
       - ./logstash/config/logstash.yml:/usr/share/logstash/config/logstash.yml:ro
       - ./logstash/pipeline:/usr/share/logstash/pipeline:ro
@@ -43,7 +43,7 @@ services:
 
   kibana:
     build:
-      context: kibana/
+      context: ./kibana
     volumes:
       - ./kibana/config/kibana.yml:/usr/share/kibana/config/kibana.yml:ro
     ports:
@@ -59,7 +59,6 @@ services:
       - elasticsearch
 
   visualizer:
-    container_name: visu
     image: dockersamples/visualizer:stable
     ports:
       - "8080:8080"
