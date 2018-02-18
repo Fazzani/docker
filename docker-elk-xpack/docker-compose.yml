@@ -19,7 +19,7 @@ services:
           - node.role == worker
           - label.provider == ovh
     networks:
-      - elknet
+      - bridge
 
   logstash:
     build:
@@ -37,7 +37,7 @@ services:
           - node.role == worker
           - label.size == medium
     networks:
-      - elknet
+      - bridge
     depends_on:
       - elasticsearch
 
@@ -54,7 +54,7 @@ services:
           - node.role == worker
           - label.size == small
     networks:
-      - elknet
+      - bridge
     depends_on:
       - elasticsearch
 
@@ -69,9 +69,9 @@ services:
       placement:
         constraints: [node.role == manager]
     networks:
-      - elknet
+      - bridge
 
 networks:
-
-  elknet:
-    driver: overlay
+  bridge:
+    external:
+      name: bridge
