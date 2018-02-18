@@ -23,7 +23,6 @@ services:
       endpoint_mode: dnsrr
       placement:
         constraints: 
-          - node.role == worker
           - node.labels.size == large
   kibana:
     image: kibana:latest
@@ -59,7 +58,6 @@ services:
       replicas: 2
       placement:
         constraints: 
-          - node.role == worker
           - node.labels.size == ovh
   visualizer:
     image: dockersamples/visualizer:stable
