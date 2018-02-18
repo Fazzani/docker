@@ -10,6 +10,7 @@
 - RabbitMQ scale on 2 instances
 - WebGrab Synker from commands
 - Redis
+- [Dockbeat](https://github.com/Ingensi/dockbeat) to monitor and log docker deamon into elasticsearch
 - Synker
   - WebApi       scale on 2 instances
   - WebClient    scale on 2 instances
