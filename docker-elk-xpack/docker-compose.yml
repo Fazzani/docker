@@ -49,6 +49,17 @@ services:
     deploy:
       mode: replicated
       replicas: 2
+  visualizer:
+    image: dockersamples/visualizer:stable
+    ports:
+      - "8080:8080"
+    volumes:
+      - "/var/run/docker.sock:/var/run/docker.sock"
+    deploy:
+      placement:
+        constraints: [node.role == manager]
+    networks:
+      - overlay
 
 networks:
   elk:
