@@ -1,0 +1,47 @@
+version: "3"
+
+services:
+  elk:
+    image: sebp/elk
+    ports:
+      - "5601:5601"
+      - "9200:9200"
+      - "5044:5044"
+    deploy:
+      placement:
+        constraints:
+          - node.role == worker
+          - label.size == large
+    networks:
+      - elknet
+
+  dockerbeat:
+    container_name: dockerbeat
+    image: ingensi/dockerbeat
+    environment:
+      ELASTICSEARCH_HOST: elasticsearch
+      ELASTICSEARCH_PORT: 9200
+    depends_on:
+      - elasticsearch
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+    deploy:
+      placement:
+        constraints: [node.role == manager]
+    networks:
+      - elknet
+
+  visualizer:
+    container_name: visu
+    image: dockersamples/visualizer:stable
+    ports:
+      - "8080:8080"
+    volumes:
+      - "/var/run/docker.sock:/var/run/docker.sock"
+    deploy:
+      placement:
+        constraints: [node.role == manager]
+    networks:
+      - elknet
+networks:
+  elknet:
