@@ -71,7 +71,7 @@ services:
       placement:
         constraints: [node.role == manager]
     networks:
-      - overlay
+      - elk
 
 networks:
   elk:
