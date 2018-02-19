@@ -8,7 +8,7 @@
 - [ ] MySQL
 - [ ] Reverse proxy and LB (traefik)
 - [ ] RabbitMQ scale on 2 instances
-- [ ] WebGrab Synker from commands
+- [ ] WebGrab Synker from commands [docker version](https://github.com/linuxserver/docker-webgrabplus)
 - [ ] Redis
 - [ ] [Dockbeat](https://github.com/Ingensi/dockbeat) to monitor and log docker deamon into elasticsearch
 - [ ] Synker
@@ -24,6 +24,20 @@
 - [ ] Fix auto deploy for appveyor and travis ci
 - [ ] Restore Filebeat and Logstash configurations
 - [ ] Rex-ray (google cloud storage 5G,  Ceph, GlusterFS, Network File System (NFS))
+
+### To test
+
+* [filebeat][filebeat]
+* [heartbeat][heartbeat]
+* [metricbeat][metricbeat]
+* [packetbeat][packetbeat]
+
+[beats]: https://www.elastic.co/products/beats
+[elastic]: https://www.elastic.co/
+[filebeat]: https://www.elastic.co/guide/en/beats/filebeat/current/running-on-docker.html
+[heartbeat]: https://www.elastic.co/guide/en/beats/heartbeat/current/running-on-docker.html
+[metricbeat]: https://www.elastic.co/guide/en/beats/metricbeat/current/running-on-docker.html
+[packetbeat]: https://www.elastic.co/guide/en/beats/packetbeat/current/running-on-docker.html
 
 ## Docker machines
 
