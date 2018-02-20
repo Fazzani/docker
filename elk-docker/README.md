@@ -39,3 +39,15 @@
 - [ ] [Create Swarm by Ansible](https://thisendout.com/2016/09/13/deploying-docker-swarm-with-ansible/)
 - [ ] WebGrab
 - [ ] ALL custom scripts and crontab
+
+## Docker Stack
+
+For elasticsearch to not give Out of Memory errors, we need set vm.max_map_count of the kernel of VMs to atleast 262144. To do this, run the following commands.
+
+```shell
+
+docker-machine ssh manager sudo sysctl -w vm.max_map_count=262144
+docker-machine ssh agent1 sudo sysctl -w vm.max_map_count=262144
+docker-machine ssh agent2 sudo sysctl -w vm.max_map_count=262144
+
+```
