@@ -20,6 +20,10 @@ services:
         constraints: 
           - node.role == worker
           - node.labels.size == small
-volumes: 
-  config: "./config"
+volumes:
+  config:
+    driver_opts:
+        o: bind
+        type: none
+        device: ./config
   data: "./data"
