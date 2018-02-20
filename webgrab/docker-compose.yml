@@ -9,13 +9,17 @@ services:
       - PUID=0
     volumes:
       - type: bind
-        source: ./config
+        source: config
         target: /config
+
       - type: bind
-        source: ./data
+        source: data
         target: /data
     deploy:
       placement:
         constraints: 
           - node.role == worker
           - node.labels.size == small
+volumes: 
+  config: "./config"
+  data: "./data"
