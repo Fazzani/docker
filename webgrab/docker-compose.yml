@@ -5,8 +5,8 @@ services:
   webgrab:
     image: linuxserver/webgrabplus
     environment:
-      - PGID=1001 
-      - PUID=1001
+      - PGID=0 
+      - PUID=0
     volumes:
       - "./config:/config"
       - "./data:/data"
