@@ -6,3 +6,4 @@
 - [ ] Add configs
 - [ ] Push data to git (tar format)
 - [ ] Install and config FileBeat to log sitepack channels to elastic
+- [ ] Auto update sitepack

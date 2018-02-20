@@ -1,0 +1,14 @@
+version: "3.3"
+
+services:
+
+  webgrab:
+    image: linuxserver/webgrabplus
+    volumes:
+      - "./config:/config"
+      - "./data:/data"
+    deploy:
+      placement:
+        constraints: 
+          - node.role == worker
+          - node.labels.size == small
