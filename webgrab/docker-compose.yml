@@ -8,8 +8,8 @@ services:
       - PGID=0 
       - PUID=0
     volumes:
-      - "./config:/config"
-      - "./data:/data"
+      - ./config:/config
+      - ./data:/data
     deploy:
       placement:
         constraints: 
