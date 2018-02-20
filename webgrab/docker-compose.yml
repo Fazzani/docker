@@ -26,4 +26,8 @@ volumes:
         o: bind
         type: none
         device: ./config
-  data: "./data"
+  data:
+    driver_opts:
+        o: bind
+        type: none
+        device: ./data
