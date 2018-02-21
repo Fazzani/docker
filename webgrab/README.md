@@ -10,7 +10,6 @@
 - [ ] Auto update sitepack
 - [ ] Test docker compose [config](https://docs.docker.com/compose/compose-file/#long-syntax)
 
-
 ## install
 
 docker plugin install rexray/efs \
