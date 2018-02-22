@@ -5,11 +5,11 @@ services:
   webgrab:
     image: linuxserver/webgrabplus
     environment:
-      - PGID=1003
-      - PUID=1004
+      - PGID=1004
+      - PUID=1003
     volumes:
-      - "webgrab_volume/config:/config"
-      - "webgrab_volume/data:/data"
+      - "config:/config"
+      - "data:/data"
     deploy:
       placement:
         constraints: 
@@ -18,6 +18,11 @@ services:
 volumes:
   config:
     driver_opts:
-      type: nfs
+      type: "nfs"
       o: "rw,relatime,vers=4.1,rsize=65536,wsize=65536,namlen=255,hard,proto=tcp,port=0,timeo=600,retrans=2,sec=sys,local_lock=none,addr=18.194.42.216"
-      device: ":/webgrab_volume"
+      device: ":/webgrab_volume/config"
+  data:
+    driver_opts:
+      type: "nfs"
+      o: "rw,relatime,vers=4.1,rsize=65536,wsize=65536,namlen=255,hard,proto=tcp,port=0,timeo=600,retrans=2,sec=sys,local_lock=none,addr=18.194.42.216"
+      device: ":/webgrab_volume/data"
