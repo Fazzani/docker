@@ -10,6 +10,7 @@
 - [ ] Test docker-compose [config](https://docs.docker.com/compose/compose-file/#long-syntax)
 - [ ] NFS ochrestration (find the right and the best storage orchestrator)
 - [x] Install and use nfs
+- [ ] Install [Tvheadend]
 
 ## Brain teaser
 
@@ -24,3 +25,5 @@ docker plugin install rexray/efs \
   EFS_SECRETKEY=xxx \
   EFS_SECURITYGROUPS="admin" \
   EFS_TAG=rexray
+
+  [Tvheadend]:https://github.com/linuxserver/docker-tvheadend
