@@ -1,2 +1,2 @@
 #2 3 * * * s6-setuidgid abc /bin/bash /defaults/update.sh
-42 22 * * * s6-setuidgid abc /bin/bash /config/webgrab-docker.sh
+42 22 * * * s6-setuidgid abc /bin/bash chmod +x /config/webgrab-docker.sh && /bin/bash /config/webgrab-docker.sh
