@@ -5,6 +5,7 @@ configDir="/config"
 logfilename="webgrab.log"
 
 pwd 
+cd /config
 
 for webGrab in ./*.config.xml; do
   echo "Processing webGrab file => $webGrab"
