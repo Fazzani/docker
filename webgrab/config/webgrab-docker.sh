@@ -10,7 +10,7 @@ cd /config
 for webGrab in ./*.config.xml; do
   echo "Processing webGrab file => $webGrab"
   echo "Moving $webGrab to WebGrab++.config.xml"
-  mv -u $webGrab "$configDir/WebGrab++.config.xml"
+  cp -u $webGrab "$configDir/WebGrab++.config.xml"
 
   # if wget --version >/dev/null 2>&1; then
   #   echo "wget Found"
