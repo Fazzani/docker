@@ -4,6 +4,8 @@ webgrabDir="/app/wg++"
 configDir="/config"
 logfilename="webgrab.log"
 
+pwd 
+
 for webGrab in ./*.config.xml; do
   echo "Processing webGrab file => $webGrab"
   echo "Moving $WebGrab to WebGrab++.config.xml"
