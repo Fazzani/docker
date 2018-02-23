@@ -50,7 +50,7 @@ function push_to_git
 function latest_from_git
 {
   echo "Getting latest version from repo git: $1 will be founded in $2" 
-  if [ ! -d $2 && ! -d $2/.git ]; then
+  if [[ ! -d $2 && ! -d $2/.git ]]; then
     echo "The repo $1 not exist so we clone it in $2"
     git clone $1
   fi
