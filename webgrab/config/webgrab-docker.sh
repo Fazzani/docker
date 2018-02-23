@@ -10,7 +10,7 @@ cd /config
 for webGrab in ./*.config.xml; do
   echo "Processing webGrab file => $webGrab"
   echo "Moving $webGrab to WebGrab++.config.xml"
-  cp -u $webGrab "$configDir/WebGrab++.config.xml"
+  cp -f $webGrab "$configDir/WebGrab++.config.xml"
 
   # if wget --version >/dev/null 2>&1; then
   #   echo "wget Found"
@@ -24,6 +24,13 @@ for webGrab in ./*.config.xml; do
   # message=$(tail -n2 $logfilename) && \
   # sudo wget https://api.pushover.net/1/messages.json --post-data="token=a1zc9d81aw14ezws414n7uvsnz2xio&user=uxepp2gjx5ch4eveufj8fo8jmcm6we&device=sm-g935f&title=WebGrabber+message&message=$message."  -qO- && \
   #sleep 5
+
 done
+
+echo "End of grabbin"
+echo "Comporessing all xmltv" && \
+# tar -czf guide.tar.gz *.xmltv && \
+echo "Pushing to git" 
+
 
 exit 0
