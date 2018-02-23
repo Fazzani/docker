@@ -1,4 +1,4 @@
-# Reste à faire
+# TODO
 
 ## services swarm to install
 
@@ -11,6 +11,7 @@
 - [ ] WebGrab Synker from commands [docker version](https://github.com/linuxserver/docker-webgrabplus)
 - [ ] Redis
 - [ ] [Dockbeat](https://github.com/Ingensi/dockbeat) to monitor and log docker deamon into elasticsearch
+- [ ] Install [Tvheadend]
 - [ ] Synker
   - [ ] WebApi       scale on 2 instances
   - [ ] WebClient    scale on 2 instances
@@ -23,7 +24,7 @@
 - [ ] Restore Synker database
 - [ ] Fix auto deploy for appveyor and travis ci
 - [ ] Restore Filebeat and Logstash configurations
-- [ ] Rex-ray (google cloud storage 5G,  Ceph, GlusterFS, Network File System (NFS))
+- [ ] Rex-ray (google cloud storage 5G, Ceph, GlusterFS, Network File System (NFS))
 
 ### To test
 
@@ -32,21 +33,14 @@
 * [metricbeat][metricbeat]
 * [packetbeat][packetbeat]
 
-[beats]: https://www.elastic.co/products/beats
-[elastic]: https://www.elastic.co/
-[filebeat]: https://www.elastic.co/guide/en/beats/filebeat/current/running-on-docker.html
-[heartbeat]: https://www.elastic.co/guide/en/beats/heartbeat/current/running-on-docker.html
-[metricbeat]: https://www.elastic.co/guide/en/beats/metricbeat/current/running-on-docker.html
-[packetbeat]: https://www.elastic.co/guide/en/beats/packetbeat/current/running-on-docker.html
-
 ## Docker machines
 
-- Aws1  : 18.194.42.216      Master    micro
 - OVH1  : 151.80.235.155     Master    large
-- Arub  : 212.237.52.79      Worker    micro
 - OVH2  : 145.239.198.33     Worker    medium
-- gcp1  : 35.203.139.243     Worker    micro
-- Rasp1 : 82.227.224.28      Worker    micro
+- Aws1  : 18.194.42.216      Master    small
+- Arub  : 212.237.52.79      Worker    small
+- gcp1  : 35.203.139.243     Worker    small
+- Rasp1 : 82.227.224.28      Worker    small
 
 ## Create Swarm by Ansible
 
@@ -65,3 +59,11 @@ docker-machine ssh agent1 sudo sysctl -w vm.max_map_count=262144
 docker-machine ssh agent2 sudo sysctl -w vm.max_map_count=262144
 
 ```
+
+[beats]: https://www.elastic.co/products/beats
+[elastic]: https://www.elastic.co/
+[filebeat]: https://www.elastic.co/guide/en/beats/filebeat/current/running-on-docker.html
+[heartbeat]: https://www.elastic.co/guide/en/beats/heartbeat/current/running-on-docker.html
+[metricbeat]: https://www.elastic.co/guide/en/beats/metricbeat/current/running-on-docker.html
+[packetbeat]: https://www.elastic.co/guide/en/beats/packetbeat/current/running-on-docker.html
+[Tvheadend]:https://github.com/linuxserver/docker-tvheadend

@@ -75,7 +75,8 @@ services:
       - "/var/run/docker.sock:/var/run/docker.sock"
     deploy:
       placement:
-        constraints: [node.role == manager]
+        - node.role == worker
+        - node.labels.size == small
 
 networks:
   elk:
