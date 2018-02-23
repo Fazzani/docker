@@ -4,9 +4,9 @@
 
 - [ ] Emby
 - [ ] Rancher
-- [ ] Elk and Filebeat (elastic data scaled on 2 instances) [EXAMPLE SWARM ELK](https://github.com/ahromis/swarm-elk)
+- [ ] Elk and Filebeat (elastic data scaled on 2 instances) [ex 1][ex_elk2] [ex 2][ex_elk]
 - [ ] MySQL
-- [ ] Reverse proxy and LB (traefik)
+- [ ] Reverse proxy and LB [traefik][ex_traefik]
 - [ ] RabbitMQ scale on 2 instances
 - [ ] WebGrab Synker from commands [docker version](https://github.com/linuxserver/docker-webgrabplus)
 - [ ] Redis
@@ -67,3 +67,6 @@ docker-machine ssh agent2 sudo sysctl -w vm.max_map_count=262144
 [metricbeat]: https://www.elastic.co/guide/en/beats/metricbeat/current/running-on-docker.html
 [packetbeat]: https://www.elastic.co/guide/en/beats/packetbeat/current/running-on-docker.html
 [Tvheadend]:https://github.com/linuxserver/docker-tvheadend
+[ex_traefik]:https://zerokspot.com/weblog/2017/09/03/docker-stacks-for-local-development/
+[ex_elk]:https://github.com/elastic/stack-docker/blob/master/docker-compose.yml
+[ex_elk2]:https://github.com/ahromis/swarm-elk
