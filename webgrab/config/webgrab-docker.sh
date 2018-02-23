@@ -4,6 +4,8 @@ webgrabDir="/app/wg++"
 configDir="/config"
 logfilename="webgrab.log"
 
+# Get all webgrab config from git
+
 pwd 
 cd /config
 
@@ -27,7 +29,7 @@ for webGrab in ./*.config.xml; do
 
 done
 
-echo "End of grabbin"
+echo "End of grabbing"
 echo "Comporessing all xmltv" && \
 # tar -czf guide.tar.gz *.xmltv && \
 echo "Pushing to git" 
