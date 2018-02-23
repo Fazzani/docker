@@ -3,7 +3,7 @@ version: "3.3"
 services:
 
   elasticsearch:
-    image: "docker.elastic.co/elasticsearch/elasticsearch-platinum:${TAG}"
+    image: "docker.elastic.co/elasticsearch/elasticsearch-platinum:6.2.2"
     environment:
       - ES_JAVA_OPTS=-Xms2g -Xmx2g
       - discovery.zen.minimum_master_nodes=1
@@ -24,7 +24,7 @@ services:
           - node.labels.size == large
 
   kibana:
-    image: kibana:${TAG}
+    image: kibana:6.2.2
     ports:
       - 5601:5601
     environment:
@@ -48,7 +48,7 @@ services:
       - kibana:/usr/share/kibana/data
 
   logstash:
-    image: docker.elastic.co/logstash/logstash:${TAG}
+    image: docker.elastic.co/logstash/logstash:6.2.2
     ports:
       - "12201:12201/udp"
     configs: # https://docs.docker.com/compose/compose-file/#long-syntax
@@ -71,7 +71,7 @@ services:
         - elasticsearch
 
   filebeat:
-    image: docker.elastic.co/beats/filebeat:${TAG}
+    image: docker.elastic.co/beats/filebeat:6.2.2
     # disable strict permission checks
     command: ["--strict.perms=false"]
     #command: -e -E 'output.elasticsearch.password=${ELASTIC_PASSWORD}'
