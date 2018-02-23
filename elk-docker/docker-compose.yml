@@ -104,7 +104,7 @@ services:
       placement:
         constraints:
           - node.role == worker
-          - node.hostname == master
+          - node.hostname == gcp1
     depends_on: 
         - elasticsearch
         - logstash
