@@ -103,7 +103,7 @@ services:
         condition: on-failure
       placement:
         constraints:
-          - node.hostname == gcp1
+          - node.hostname == gcp-1
     depends_on: 
         - elasticsearch
         - logstash
