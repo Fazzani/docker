@@ -5,7 +5,6 @@ services:
   elasticsearch:
     image: docker.elastic.co/elasticsearch/elasticsearch-platinum:${TAG}
     environment:
-      - TAG=${TAG}
       - ES_JAVA_OPTS=-Xms2g -Xmx2g
       - discovery.zen.minimum_master_nodes=1
       - ELASTIC_PASSWORD=${ELASTIC_PASSWORD}
@@ -28,7 +27,6 @@ services:
     ports:
       - 5601:5601
     environment:
-      - TAG=${TAG}
       - ELASTICSEARCH_URL=http://elasticsearch:${ELASTICSEARCH_PORT}
       - ELASTICSEARCH_USERNAME=${ELASTICSEARCH_USERNAME}
       - ELASTICSEARCH_PASSWORD=${ELASTIC_PASSWORD}
@@ -125,7 +123,7 @@ services:
           - node.labels.size == small
 
 networks:
-  elk:
+  elk-2:
     driver: overlay
     driver_opts:
       encrypted: "true"
