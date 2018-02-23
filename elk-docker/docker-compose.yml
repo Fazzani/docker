@@ -1,3 +1,4 @@
+version: "3.3"
 
 services:
 
@@ -40,6 +41,7 @@ services:
           - node.labels.size == medium
     healthcheck:
       test: wget -qO- http://localhost:5601 > /dev/null
+      interval: 30s
       retries: 3
     volumes:
       - kibana:/usr/share/kibana/data
@@ -62,6 +64,7 @@ services:
       restart_policy:
         condition: on-failure
       placement:
+        constraints: 
           - node.labels.provider == ovh
     depends_on: 
         - elasticsearch
