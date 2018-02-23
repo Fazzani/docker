@@ -1,12 +1,14 @@
-version: "3.3"
+version: "3.4"
 
 services:
 
   elasticsearch:
-    command: elasticsearch -Enetwork.host=0.0.0.0 -Ediscovery.zen.ping.unicast.hosts=elasticsearch
+    image: docker.elastic.co/elasticsearch/elasticsearch-platinum:${TAG}
     environment:
-      ES_JAVA_OPTS: -Xms2g -Xmx2g
-    image: elasticsearch:5
+      - ES_JAVA_OPTS=-Xms2g -Xmx2g
+      - discovery.zen.minimum_master_nodes=1
+      - ELASTIC_PASSWORD=${ELASTIC_PASSWORD}
+      - node.name=elasticsearch
     ulimits:
       memlock: -1
       nofile:
@@ -14,9 +16,11 @@ services:
         soft: 65536
       nproc: 65538
     volumes:
-      - /usr/share/elasticsearch/data
+      - elasticsearch:/usr/share/elasticsearch/data
     networks:
       - elk
+    ports:
+      - ${ELASTICSEARCH_PORT}:9200
     deploy:
       mode: replicated
       replicas: 1
@@ -25,11 +29,13 @@ services:
         constraints: 
           - node.labels.size == large
   kibana:
-    image: kibana:latest
+    image: kibana:${TAG}
     ports:
       - "5601:5601"
     environment:
-      ELASTICSEARCH_URL: http://elasticsearch:9200
+      - ELASTICSEARCH_URL=http://elasticsearch:${ELASTICSEARCH_PORT}
+      - ELASTICSEARCH_USERNAME=${ELASTICSEARCH_USERNAME}
+      - ELASTICSEARCH_PASSWORD=${ELASTIC_PASSWORD}
     networks:
       - elk
     deploy:
@@ -43,15 +49,16 @@ services:
       test: wget -qO- http://localhost:5601 > /dev/null
       interval: 30s
       retries: 3
+    volumes:
+      - kibana:/usr/share/kibana/data
 
   logstash:
-    hostname: logstash
-    command: sh -c "logstash -e 'input { syslog  { type => syslog port => 10514   } gelf { } } output { stdout { codec => rubydebug } elasticsearch { hosts => [ \"elasticsearch\" ] } }'"
-    image: logstash:alpine
+    image: docker.elastic.co/logstash/logstash:${TAG}
     ports:
-        - "10514:10514/tcp"
-        - "10514:10514/udp"
-        - "12201:12201/udp"
+      - "12201:12201/udp"
+    configs: # https://docs.docker.com/compose/compose-file/#long-syntax
+      - source: ls_config
+        target: /usr/share/logstash/pipeline/logstash.conf
     networks:
       - elk
     deploy:
@@ -65,6 +72,44 @@ services:
       placement:
         constraints: 
           - node.labels.provider == ovh
+
+  filebeat:
+    image: docker.elastic.co/beats/filebeat:${TAG}
+    # disable strict permission checks
+    command: ["--strict.perms=false"]
+    #command: -e -E 'output.elasticsearch.password=${ELASTIC_PASSWORD}'
+    volumes:
+      - filebeat_webgrab_sitepack:/mnt/log:ro
+      - filebeat:/usr/share/filebeat/data
+      - /var/run/docker.sock:/var/run/docker.sock
+      # This is needed for filebeat to load container log path as specified in filebeat.yml
+      - /var/lib/docker/containers/:/var/lib/docker/containers/:ro
+
+      # # This is needed for filebeat to load jenkins build log path as specified in filebeat.yml
+      # - /var/lib/docker/volumes/jenkins_home/_data/jobs/:/var/lib/docker/volumes/jenkins_home/_data/jobs/:ro
+
+      # This is needed for filebeat to load logs for system and auth modules
+      - /var/log/:/var/log/:ro
+      # This is needed for filebeat to load logs for auditd module
+      # - /var/log/audit/:/var/log/audit/:ro
+    # disable strict permission checks
+    command: ["--strict.perms=false"]
+    configs:
+     - source: fb_config
+       target: /usr/share/filebeat/filebeat.yml
+    user: root
+    networks:
+      - elk
+    deploy:
+      restart_policy:
+        condition: on-failure
+      placement:
+        constraints:
+          - node.role == worker
+          - node.hostname == master
+    depends_on: 
+        - elasticsearch
+        - logstash
 
   visualizer:
     image: dockersamples/visualizer:stable
@@ -83,3 +128,16 @@ networks:
     driver: overlay
     driver_opts:
       encrypted: "true"
+
+volumes:
+  elasticsearch:
+  kibana:
+  filebeat_webgrab_sitepack:
+    driver_opts:
+      type: "nfs"
+      o: "rw,relatime,vers=4.1,rsize=65536,wsize=65536,namlen=255,hard,proto=tcp,port=0,timeo=600,retrans=2,sec=sys,local_lock=none,no_root_squash,addr=18.194.42.216"
+      device: ":/webgrab_volume/config/siteini.pack"
+
+configs:
+  fb_config:
+    file: filebeat.yml

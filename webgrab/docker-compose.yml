@@ -14,7 +14,8 @@ services:
       placement:
         constraints: 
           - node.role == worker
-          - node.labels.size == small
+          - node.hostname == master
+          
 volumes:
   config:
     driver_opts:
