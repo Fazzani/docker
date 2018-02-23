@@ -60,7 +60,7 @@ cd /config
 
 install_necessary_packages
 
-latest_from_git repo_git_url repo_git_name
+latest_from_git $repo_git_url $repo_git_name
 
 for webGrab in ./*.config.xml; do
 
@@ -81,6 +81,6 @@ echo "Compressing all xmltv" && \
 tar -czf guide.tar.gz *.xmltv && \
 
 #pushing to git
-push_to_git repo_git_url 
+push_to_git $repo_git_url 
 
 exit 0
