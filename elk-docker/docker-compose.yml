@@ -9,12 +9,6 @@ services:
       - discovery.zen.minimum_master_nodes=1
       - ELASTIC_PASSWORD=${ELASTIC_PASSWORD}
       - node.name=elasticsearch
-    ulimits:
-      memlock: -1
-      nofile:
-        hard: 65536
-        soft: 65536
-      nproc: 65538
     volumes:
       - elasticsearch:/usr/share/elasticsearch/data
     networks:
