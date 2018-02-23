@@ -97,7 +97,7 @@ services:
        target: /usr/share/filebeat/filebeat.yml
     user: root
     networks:
-      - elk
+      - elk-2
     deploy:
       restart_policy:
         condition: on-failure
@@ -119,7 +119,7 @@ services:
     deploy:
       placement:
         constraints: 
-          - node.role == worker
+          - node.role == manager
           - node.labels.size == small
 
 networks:
