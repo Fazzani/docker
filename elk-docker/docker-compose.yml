@@ -31,7 +31,7 @@ services:
   kibana:
     image: kibana:${TAG}
     ports:
-      - "5601:5601"
+      - 5601:5601
     environment:
       - ELASTICSEARCH_URL=http://elasticsearch:${ELASTICSEARCH_PORT}
       - ELASTICSEARCH_USERNAME=${ELASTICSEARCH_USERNAME}
@@ -120,8 +120,9 @@ services:
       - "/var/run/docker.sock:/var/run/docker.sock"
     deploy:
       placement:
-        - node.role == worker
-        - node.labels.size == small
+        constraints: 
+          - node.role == worker
+          - node.labels.size == small
 
 networks:
   elk:
