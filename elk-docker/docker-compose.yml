@@ -145,4 +145,4 @@ configs:
   fb_config:
     file: filebeat.yml
   ls_config:
-    file: ./logstash/conf.d/logstash-sitepack.conf
+    file: $PWD/logstash/conf.d/logstash-sitepack.conf
