@@ -103,7 +103,6 @@ services:
         condition: on-failure
       placement:
         constraints:
-          - node.role == worker
           - node.hostname == gcp1
     depends_on: 
         - elasticsearch
