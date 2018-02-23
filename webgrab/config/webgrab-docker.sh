@@ -6,7 +6,8 @@
 webgrabDir="/app/wg++"
 configDir="/config"
 logfilename="webgrab.log"
-repo_git="https://github.com/Fazzani/webgrab-configs.git"
+repo_git_name="webgrab-configs"
+repo_git_url="https://github.com/Fazzani/webgrab-configs.git"
 #---------------------------
 # Install all needed tools
 #---------------------------
@@ -25,7 +26,7 @@ function install_necessary_packages {
 function push_to_git
 {
   # coping output file to git folder
-  cp -f guide.tar.gz ./webgrab-configs/ && \
+  cp -f guide.tar.gz ./$repo_git_name/ && \
   echo "push to git"
   git push
 }
@@ -42,9 +43,8 @@ function latest_from_git
     git clone $1
   fi
 
-  # coping output file to git folder
-  cp -f guide.tar.gz ./webgrab-configs/ && \
-  git push
+  git pull && \
+  cp -f $2/*.config.xml .
 }
 
 #--------------------------------------------- main ----------------------------------------------------
@@ -52,7 +52,8 @@ cd /config
 
 install_necessary_packages
 
-latest_from_git repo_git
+latest_from_git repo_git_url
+repo_git_name=
 
 for webGrab in ./*.config.xml; do
 
@@ -73,6 +74,6 @@ echo "Compressing all xmltv" && \
 tar -czf guide.tar.gz *.xmltv && \
 
 #pushing to git
-push_to_git repo_git
+push_to_git repo_git_url repo_git_name
 
 exit 0
