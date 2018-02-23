@@ -22,18 +22,23 @@ function install_necessary_packages {
 
 #--------------------------
 # Pushing to git
+# params : git repo name
 #--------------------------
 function push_to_git
 {
   # coping output file to git folder
   cp -f guide.tar.gz ./$repo_git_name/ && \
   echo "push to git"
-  git push
+  cd $1 && \
+  git push && \
+  cd .. 
+  return 0
 }
 
 #--------------------------
 # Getting last version from git
-# params : git Repo 
+# params : git repo url
+# params : git repo name
 #--------------------------
 function latest_from_git
 {
@@ -43,8 +48,11 @@ function latest_from_git
     git clone $1
   fi
 
+  cd $2 && \
   git pull && \
-  cp -f $2/*.config.xml .
+  cp -f *.config.xml ../ && \
+  cd ..
+  return 0
 }
 
 #--------------------------------------------- main ----------------------------------------------------
@@ -52,8 +60,7 @@ cd /config
 
 install_necessary_packages
 
-latest_from_git repo_git_url
-repo_git_name=
+latest_from_git repo_git_url repo_git_name
 
 for webGrab in ./*.config.xml; do
 
@@ -74,6 +81,6 @@ echo "Compressing all xmltv" && \
 tar -czf guide.tar.gz *.xmltv && \
 
 #pushing to git
-push_to_git repo_git_url repo_git_name
+push_to_git repo_git_url 
 
 exit 0
