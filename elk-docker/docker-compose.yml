@@ -5,6 +5,7 @@ services:
   elasticsearch:
     image: "docker.elastic.co/elasticsearch/elasticsearch-platinum:${TAG}"
     environment:
+      - TAG=${TAG}
       - ES_JAVA_OPTS=-Xms2g -Xmx2g
       - discovery.zen.minimum_master_nodes=1
       - ELASTIC_PASSWORD=${ELASTIC_PASSWORD}
@@ -27,6 +28,7 @@ services:
     ports:
       - 5601:5601
     environment:
+      - TAG=${TAG}
       - ELASTICSEARCH_URL=http://elasticsearch:${ELASTICSEARCH_PORT}
       - ELASTICSEARCH_USERNAME=${ELASTICSEARCH_USERNAME}
       - ELASTICSEARCH_PASSWORD=${ELASTIC_PASSWORD}
@@ -53,6 +55,8 @@ services:
     configs: # https://docs.docker.com/compose/compose-file/#long-syntax
       - source: ls_config
         target: /usr/share/logstash/pipeline/logstash.conf
+    environment:
+      - TAG=${TAG}
     networks:
       - elk
     deploy:
