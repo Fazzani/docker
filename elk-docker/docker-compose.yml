@@ -65,12 +65,11 @@ services:
       - 'path.config="/usr/share/logstash/config"'
     ports:
       - "12201:12201/udp"
-      - "5045:5045/udp"
-      - "5960:5960/udp"
     networks:
       - elk-2
     volumes:
-      - logstash_config:/usr/share/logstash/pipeline
+      # - logstash_config:/usr/share/logstash/pipeline
+      - ./logstash/config/pipeline/logstash.conf:/usr/share/logstash/pipeline/logstash.conf
       # - ./logstash.yml:/usr/share/logstash/config/logstash.yml
     deploy:
       mode: replicated
