@@ -1,7 +1,7 @@
 filebeat.prospectors:
 -
       paths:
-        - /root/siteini.pack/**/*.xml
+        - /usr/share/sitepack/**/*.xml
       input_type: log
       tail_files: false
       scan_frequency: 10m
@@ -9,10 +9,6 @@ filebeat.prospectors:
         pattern: '<channel'
         negate: true
         match: after
-#output.elasticsearch:
-#  hosts: ["151.80.235.155:9201"]
-#  username: "logstash"
-#  password: "logstash"
 
 output.logstash:
     hosts: ["logstash:5045"]
