@@ -60,7 +60,9 @@ services:
     environment:
       - 'xpack.monitoring.elasticsearch.password=${ELASTIC_PASSWORD}'
       - 'xpack.monitoring.elasticsearch.username=${ELASTICSEARCH_USERNAME}'
-      - 'xpack.monitoring.elasticsearch.url="http://elasticsearch:9200"'
+      #- 'xpack.monitoring.elasticsearch.url="http://elasticsearch:9200"'
+      # - http.host
+      - path.config="/usr/share/logstash/config/pipeline"
     ports:
       - "12201:12201/udp"
       - "5045:5045/udp"
