@@ -53,20 +53,20 @@ services:
 
   logstash:
     image: docker.elastic.co/logstash/logstash:${TAG}
-    ports:
-      - "12201:12201/udp"
-      - "5045:5045/udp"
-      - "5960:5960/udp"
     # configs: # https://docs.docker.com/compose/compose-file/#long-syntax
     #   - source: ls_config
     #     target: /usr/share/logstash/pipeline/logstash.conf
     environment:
       - 'xpack.monitoring.elasticsearch.password=${ELASTIC_PASSWORD}'
       - 'xpack.monitoring.elasticsearch.username=${ELASTICSEARCH_USERNAME}'
+    ports:
+      - "12201:12201/udp"
+      - "5045:5045/udp"
+      - "5960:5960/udp"
     networks:
       - elk-2
     volumes:
-      - logstash/config:/usr/share/logstash/config
+      - ./logstash/config:/usr/share/logstash/config
     deploy:
       mode: replicated
       replicas: 2
