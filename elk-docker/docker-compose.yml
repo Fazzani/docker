@@ -18,6 +18,8 @@ services:
     deploy:
       mode: replicated
       replicas: 1
+      restart_policy:
+        condition: on-failure
       placement:
         constraints: 
           - node.labels.size == large
@@ -95,7 +97,6 @@ services:
     configs:
      - source: fb_config
        target: /usr/share/filebeat/filebeat.yml
-    user: root
     networks:
       - elk-2
     deploy:
@@ -103,6 +104,7 @@ services:
         condition: on-failure
       placement:
         constraints:
+          - node.role == worker
           - node.hostname == gcp-1
     depends_on: 
         - elasticsearch

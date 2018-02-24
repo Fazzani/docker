@@ -15,7 +15,7 @@ filebeat.prospectors:
 #  password: "logstash"
 
 output.logstash:
-    hosts: ["151.80.235.155:5045"]
+    hosts: ["logstash:5045"]
     worker: 1
 console:
     pretty: true
