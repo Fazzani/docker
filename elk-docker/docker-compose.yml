@@ -44,10 +44,6 @@ services:
         constraints: 
           - node.role == worker
           - node.labels.size == medium
-    healthcheck:
-      test: wget -qO- http://kibana:5601 > /dev/null
-      interval: 20m
-      retries: 3
     volumes:
       - kibana:/usr/share/kibana/data
 
