@@ -2,7 +2,7 @@ filebeat.prospectors:
 -
       paths:
         - /usr/share/sitepack/**/*.xml
-      input_type: log
+      type: log
       tail_files: false
       scan_frequency: 10m
       multiline:
