@@ -66,8 +66,7 @@ services:
     networks:
       - elk-2
     volumes:
-      - ./logstash/config/logstash.conf:/usr/share/logstash/config/logstash.conf
-      - ./logstash/config/logstash-sitepack.conf:/usr/share/logstash/config/logstash-sitepack.conf
+      - logstash_config:/usr/share/logstash/config
     deploy:
       mode: replicated
       replicas: 2
@@ -157,6 +156,11 @@ volumes:
       type: "nfs"
       o: "addr=18.194.42.216,nolock,soft,rw"
       device: ":/webgrab_volume/filebeat/data"
+  logstash_config:
+    driver_opts:
+      type: "nfs"
+      o: "addr=18.194.42.216,nolock,soft,rw"
+      device: ":/webgrab_volume/logstash/config"
 
 configs:
   fb_config:
