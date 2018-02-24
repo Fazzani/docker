@@ -61,7 +61,7 @@ services:
       - source: ls_config
         target: /usr/share/logstash/pipeline/logstash.conf
     environment:
-      - TAG=${TAG}
+      - 'xpack.monitoring.elasticsearch.password=${ELASTIC_PASSWORD}'
     networks:
       - elk-2
     deploy:
@@ -83,7 +83,7 @@ services:
   filebeat:
     image: docker.elastic.co/beats/filebeat:${TAG}
     # disable strict permission checks
-    command: ["--strict.perms=false"]
+    command: ["--strict.perms=false -e -E 'output.elasticsearch.password=${ELASTIC_PASSWORD}'"]
     #command: -e -E 'output.elasticsearch.password=${ELASTIC_PASSWORD}'
     volumes:
       #- filebeat_webgrab_sitepack:/mnt/log:ro
