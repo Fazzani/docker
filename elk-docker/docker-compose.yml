@@ -169,4 +169,4 @@ configs:
   fb_config:
     file: filebeat.yml
   ls_config:
-    file: $PWD/logstash/logstash.yml
+    file: $PWD/logstash/config/logstash.yml
