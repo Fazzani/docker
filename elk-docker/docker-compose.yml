@@ -62,6 +62,7 @@ services:
         target: /usr/share/logstash/pipeline/logstash.conf
     environment:
       - 'xpack.monitoring.elasticsearch.password=${ELASTIC_PASSWORD}'
+      - 'xpack.monitoring.elasticsearch.username=${ELASTICSEARCH_USERNAME}'
     networks:
       - elk-2
     deploy:
