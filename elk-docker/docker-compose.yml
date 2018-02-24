@@ -10,7 +10,7 @@ services:
       - ELASTIC_PASSWORD=${ELASTIC_PASSWORD}
       - node.name=elasticsearch
     volumes:
-      - elasticsearch:/usr/share/elasticsearch/data
+      - elasticsearch_data:/usr/share/elasticsearch/data
     networks:
       - elk-2
     ports:
@@ -49,7 +49,7 @@ services:
     #   interval: 20m
     #   retries: 3
     volumes:
-      - kibana:/usr/share/kibana/data
+      - kibana_data:/usr/share/kibana/data
 
   logstash:
     image: docker.elastic.co/logstash/logstash:${TAG}
@@ -58,6 +58,7 @@ services:
     #     target: /usr/share/logstash/config/logstash.yml
     #     mode: 0440
     environment:
+      - ELASTICSEARCH_URL=http://elasticsearch:${ELASTICSEARCH_PORT}
       - ELASTICSEARCH_USERNAME=${ELASTICSEARCH_USERNAME}
       - ELASTIC_PASSWORD=${ELASTIC_PASSWORD}
     #   - 'xpack.monitoring.elasticsearch.password=${ELASTIC_PASSWORD}'
@@ -149,12 +150,20 @@ networks:
       encrypted: "true"
 
 volumes:
-  elasticsearch:
-  kibana:
+  elasticsearch_data:
+     driver_opts:
+      type: "nfs"
+      #o: "rw,relatime,vers=4.1,rsize=65536,wsize=65536,namlen=255,nolock,soft,proto=tcp,port=0,timeo=600,retrans=2,sec=sys,local_lock=none,no_root_squash,addr=18.194.42.216"
+      o: "nolock,soft,rw,addr=18.194.42.216"
+      device: ":/webgrab_volume/elastic/data"
+  kibana_data:
+     driver_opts:
+      type: "nfs"
+      o: "nolock,soft,rw,addr=18.194.42.216"
+      device: ":/webgrab_volume/kibana/data"
   filebeat_webgrab_sitepack:
     driver_opts:
       type: "nfs"
-      #o: "rw,relatime,vers=4.1,rsize=65536,wsize=65536,namlen=255,nolock,soft,proto=tcp,port=0,timeo=600,retrans=2,sec=sys,local_lock=none,no_root_squash,addr=18.194.42.216"
       o: "nolock,soft,rw,addr=18.194.42.216"
       device: ":/webgrab_volume/config/siteini.pack"
   filebeat_data:
