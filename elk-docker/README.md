@@ -5,6 +5,7 @@
 - [ ] Emby
 - [ ] Rancher
 - [ ] Elk and Filebeat (elastic data scaled on 2 instances) [ex 1][ex_elk2] [ex 2][ex_elk]
+  - [ ] [logstash config][link_logstash_config]
 - [ ] MySQL
 - [ ] Reverse proxy and LB [traefik][ex_traefik]
 - [ ] RabbitMQ scale on 2 instances
@@ -70,3 +71,4 @@ docker-machine ssh agent2 sudo sysctl -w vm.max_map_count=262144
 [ex_traefik]:https://zerokspot.com/weblog/2017/09/03/docker-stacks-for-local-development/
 [ex_elk]:https://github.com/elastic/stack-docker/blob/master/docker-compose.yml
 [ex_elk2]:https://github.com/ahromis/swarm-elk
+[link_logstash_config]:https://www.elastic.co/guide/en/logstash/5.5/docker.html
