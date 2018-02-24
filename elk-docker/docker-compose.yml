@@ -75,7 +75,7 @@ services:
         parallelism: 2
         delay: 10s
       restart_policy:
-        delay: 3m
+        delay: 1m
         max_attempts: 3
         window: 120s
       placement:
