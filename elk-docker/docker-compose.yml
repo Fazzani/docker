@@ -70,7 +70,7 @@ services:
     networks:
       - elk-2
     volumes:
-      - logstash_config:/usr/share/logstash/config
+      - logstash_config:/usr/share/logstash/pipeline
       # - ./logstash.yml:/usr/share/logstash/config/logstash.yml
     deploy:
       mode: replicated
