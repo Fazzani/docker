@@ -94,7 +94,7 @@ services:
   filebeat:
     image: docker.elastic.co/beats/filebeat:${TAG}
     # disable strict permission checks
-    command: ["--strict.perms=false -e -E output.elasticsearch.password='${ELASTIC_PASSWORD}'"]
+    command: ["--strict.perms=false"]
     volumes:
       - filebeat_webgrab_sitepack:/usr/share/sitepack/:ro
       #- /var/run/docker.sock:/var/run/docker.sock
