@@ -53,9 +53,9 @@ services:
 
   logstash:
     image: docker.elastic.co/logstash/logstash:${TAG}
-    # configs: # https://docs.docker.com/compose/compose-file/#long-syntax
-    #   - source: ls_config
-    #     target: /usr/share/logstash/pipeline/logstash.conf
+    configs: # https://docs.docker.com/compose/compose-file/#long-syntax
+      - source: ls_config
+        target: /usr/share/logstash/config/logstash.yml
     environment:
       - 'xpack.monitoring.elasticsearch.password=${ELASTIC_PASSWORD}'
       - 'xpack.monitoring.elasticsearch.username=${ELASTICSEARCH_USERNAME}'
@@ -166,5 +166,5 @@ volumes:
 configs:
   fb_config:
     file: filebeat.yml
-  # ls_config:
-  #   file: $PWD/logstash/config/logstash-sitepack.conf
+  ls_config:
+    file: $PWD/logstash/logstash.yml
