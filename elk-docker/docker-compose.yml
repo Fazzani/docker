@@ -81,7 +81,7 @@ services:
     #command: -e -E 'output.elasticsearch.password=${ELASTIC_PASSWORD}'
     volumes:
       - filebeat_webgrab_sitepack:/mnt/log:ro
-      - .:/usr/share/filebeat/data
+      # - .:/usr/share/filebeat/data
       - /var/run/docker.sock:/var/run/docker.sock
       # This is needed for filebeat to load container log path as specified in filebeat.yml
       - /var/lib/docker/containers/:/var/lib/docker/containers/:ro
