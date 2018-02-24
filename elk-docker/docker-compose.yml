@@ -56,6 +56,7 @@ services:
     configs: # https://docs.docker.com/compose/compose-file/#long-syntax
       - source: ls_config
         target: /usr/share/logstash/config/logstash.yml
+        mode: 0440
     environment:
       - 'xpack.monitoring.elasticsearch.password=${ELASTIC_PASSWORD}'
       - 'xpack.monitoring.elasticsearch.username=${ELASTICSEARCH_USERNAME}'
