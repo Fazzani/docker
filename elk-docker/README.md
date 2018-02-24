@@ -26,6 +26,8 @@
 - [ ] Fix auto deploy for appveyor and travis ci
 - [ ] Restore Filebeat and Logstash configurations
 - [ ] Rex-ray (google cloud storage 5G, Ceph, GlusterFS, Network File System (NFS))
+- [ ] SSL Elk communication AND [keystore][keystore_logstash]
+- [ ] Fix [NetShare][NetShare] plugin
 
 ### To test
 
@@ -33,15 +35,6 @@
 * [heartbeat][heartbeat]
 * [metricbeat][metricbeat]
 * [packetbeat][packetbeat]
-
-## Docker machines
-
-- OVH1  : 151.80.235.155     Master    large
-- OVH2  : 145.239.198.33     Worker    medium
-- Aws1  : 18.194.42.216      Master    small
-- Arub  : 212.237.52.79      Worker    small
-- gcp1  : 35.203.139.243     Worker    small
-- Rasp1 : 82.227.224.28      Worker    small
 
 ## Create Swarm by Ansible
 
@@ -61,6 +54,15 @@ docker-machine ssh agent2 sudo sysctl -w vm.max_map_count=262144
 
 ```
 
+## Docker machines
+
+- OVH1  : 151.80.235.155     Master    large
+- OVH2  : 145.239.198.33     Worker    medium
+- Aws1  : 18.194.42.216      Master    small
+- Arub  : 212.237.52.79      Worker    small
+- gcp1  : 35.203.139.243     Worker    small
+- Rasp1 : 82.227.224.28      Worker    small
+
 [beats]: https://www.elastic.co/products/beats
 [elastic]: https://www.elastic.co/
 [filebeat]: https://www.elastic.co/guide/en/beats/filebeat/current/running-on-docker.html
@@ -72,3 +74,5 @@ docker-machine ssh agent2 sudo sysctl -w vm.max_map_count=262144
 [ex_elk]:https://github.com/elastic/stack-docker/blob/master/docker-compose.yml
 [ex_elk2]:https://github.com/ahromis/swarm-elk
 [link_logstash_config]:https://www.elastic.co/guide/en/logstash/5.5/docker.html
+[keystore_logstash]:https://www.elastic.co/guide/en/logstash/current/keystore.html
+[NetShare]:(http://netshare.containx.io/docs/getting-started)
