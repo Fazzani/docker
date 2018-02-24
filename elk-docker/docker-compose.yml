@@ -57,14 +57,16 @@ services:
       - "12201:12201/udp"
       - "5045:5045/udp"
       - "5960:5960/udp"
-    configs: # https://docs.docker.com/compose/compose-file/#long-syntax
-      - source: ls_config
-        target: /usr/share/logstash/pipeline/logstash.conf
+    # configs: # https://docs.docker.com/compose/compose-file/#long-syntax
+    #   - source: ls_config
+    #     target: /usr/share/logstash/pipeline/logstash.conf
     environment:
       - 'xpack.monitoring.elasticsearch.password=${ELASTIC_PASSWORD}'
       - 'xpack.monitoring.elasticsearch.username=${ELASTICSEARCH_USERNAME}'
     networks:
       - elk-2
+    volumes:
+      - ./logstash/conf.d:/usr/share/logstash/config
     deploy:
       mode: replicated
       replicas: 2
