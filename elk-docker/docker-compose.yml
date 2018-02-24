@@ -55,6 +55,8 @@ services:
     image: docker.elastic.co/logstash/logstash:${TAG}
     ports:
       - "12201:12201/udp"
+      - "5045:5045/udp"
+      - "5960:5960/udp"
     configs: # https://docs.docker.com/compose/compose-file/#long-syntax
       - source: ls_config
         target: /usr/share/logstash/pipeline/logstash.conf
