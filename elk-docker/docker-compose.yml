@@ -57,11 +57,12 @@ services:
     #   - source: ls_config
     #     target: /usr/share/logstash/config/logstash.yml
     #     mode: 0440
-    # environment:
+    environment:
+      - ELASTICSEARCH_USERNAME=${ELASTICSEARCH_USERNAME}
+      - ELASTIC_PASSWORD=${ELASTIC_PASSWORD}
     #   - 'xpack.monitoring.elasticsearch.password=${ELASTIC_PASSWORD}'
     #   - 'xpack.monitoring.elasticsearch.username=${ELASTICSEARCH_USERNAME}'
     #   - 'xpack.monitoring.elasticsearch.url="http://elasticsearch:9200"'
-    #   # - http.host
     #   - 'path.config="/usr/share/logstash/config"'
     ports:
       - "12201:12201/udp"
