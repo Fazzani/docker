@@ -67,6 +67,7 @@ services:
     #   - 'path.config="/usr/share/logstash/config"'
     ports:
       - "12201:12201/udp"
+      - "9600:9600"
     networks:
       - elk-2
     volumes:
