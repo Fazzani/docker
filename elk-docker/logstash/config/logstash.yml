@@ -61,7 +61,7 @@ path.data: /var/lib/logstash
 #
 # Where to fetch the pipeline configuration for the main pipeline
 #
-path.config: /etc/logstash/conf.d/*.conf
+path.config: /usr/share/logstash/config/*.conf
 # Pipeline configuration string for the main pipeline
 #
 # config.string:
@@ -192,6 +192,6 @@ path.logs: /var/log/logstash
 #
 # Where to find custom plugins
 # path.plugins: []
-xpack.monitoring.elasticsearch.url: ["elasticsearch:9201"] 
-#xpack.monitoring.elasticsearch.username: "logstash_system" 
-#xpack.monitoring.elasticsearch.password: "changeme"
+xpack.monitoring.elasticsearch.url: ["elasticsearch:9200"] 
+xpack.monitoring.elasticsearch.username: "elastic" 
+xpack.monitoring.elasticsearch.password: "changeme"
