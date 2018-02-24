@@ -110,7 +110,6 @@ services:
       # This is needed for filebeat to load logs for auditd module
       # - /var/log/audit/:/var/log/audit/:ro
     # disable strict permission checks
-    command: ["--strict.perms=false"]
     configs:
      - source: fb_config
        target: /usr/share/filebeat/filebeat.yml
