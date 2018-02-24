@@ -53,10 +53,10 @@ services:
 
   logstash:
     image: docker.elastic.co/logstash/logstash:${TAG}
-    configs: # https://docs.docker.com/compose/compose-file/#long-syntax
-      - source: ls_config
-        target: /usr/share/logstash/config/logstash.yml
-        mode: 0440
+    # configs: # https://docs.docker.com/compose/compose-file/#long-syntax
+    #   - source: ls_config
+    #     target: /usr/share/logstash/config/logstash.yml
+    #     mode: 0440
     environment:
       - 'xpack.monitoring.elasticsearch.password=${ELASTIC_PASSWORD}'
       - 'xpack.monitoring.elasticsearch.username=${ELASTICSEARCH_USERNAME}'
@@ -68,6 +68,7 @@ services:
       - elk-2
     volumes:
       - logstash_config:/usr/share/logstash/config
+      - logstash.yml:/usr/share/logstash/config/logstash.yml
     deploy:
       mode: replicated
       replicas: 2
