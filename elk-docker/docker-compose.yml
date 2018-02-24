@@ -70,6 +70,7 @@ services:
     volumes:
       - logstash_config:/usr/share/logstash/config
       - logstash_pipeline:/usr/share/logstash/pipeline
+      - logstash_data:/var/lib/logstash
       # - ./logstash.yml:/usr/share/logstash/config/logstash.yml
     deploy:
       mode: replicated
@@ -174,6 +175,12 @@ volumes:
       #o: "rw,relatime,vers=4.1,rsize=65536,wsize=65536,nolock,soft,namlen=255,proto=tcp,port=0,timeo=600,retrans=2,sec=sys,local_lock=none,no_root_squash,addr=18.194.42.216"
       o: "addr=18.194.42.216,nolock,soft,rw"
       device: ":/webgrab_volume/logstash/config/pipeline"
+  logstash_data:
+    driver_opts:
+      type: "nfs"
+      #o: "rw,relatime,vers=4.1,rsize=65536,wsize=65536,nolock,soft,namlen=255,proto=tcp,port=0,timeo=600,retrans=2,sec=sys,local_lock=none,no_root_squash,addr=18.194.42.216"
+      o: "addr=18.194.42.216,nolock,soft,rw"
+      device: ":/webgrab_volume/logstash/data"
 
 configs:
   fb_config:
