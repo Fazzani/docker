@@ -44,6 +44,10 @@ services:
         constraints: 
           - node.role == worker
           - node.labels.size == medium
+    # healthcheck:
+    #   test: wget -qO- http://kibana:5601 > /dev/null
+    #   interval: 20m
+    #   retries: 3
     volumes:
       - kibana:/usr/share/kibana/data
 
@@ -81,7 +85,7 @@ services:
     #command: -e -E 'output.elasticsearch.password=${ELASTIC_PASSWORD}'
     volumes:
       - filebeat_webgrab_sitepack:/mnt/log:ro
-      # - .:/usr/share/filebeat/data
+      # - filebeat_data:/usr/share/filebeat/data
       - /var/run/docker.sock:/var/run/docker.sock
       # This is needed for filebeat to load container log path as specified in filebeat.yml
       - /var/lib/docker/containers/:/var/lib/docker/containers/:ro
