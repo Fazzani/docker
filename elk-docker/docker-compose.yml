@@ -89,13 +89,15 @@ services:
 
   filebeat:
     image: docker.elastic.co/beats/filebeat:${TAG}
+     # Need to override user so we can access the log files, and docker.sock
+    user: root
     # disable strict permission checks
     command: ["--strict.perms=false"]
     ports:
       - "5555:8080"
     volumes:
-      - filebeat_webgrab_sitepack:/usr/share/sitepack/
-      - filebeat_logs:/usr/share/filebeat/logs/
+      - filebeat_webgrab_sitepack:/usr/share/sitepack/:ro
+      - filebeat_logs:/usr/share/filebeat/logs/:ro
       - filebeat_data:/usr/share/filebeat/data/
       #- /var/run/docker.sock:/var/run/docker.sock
       # This is needed for filebeat to load container log path as specified in filebeat.yml
@@ -140,8 +142,6 @@ services:
         constraints: 
           - node.role == manager
           - node.labels.size == small
-
-networks: {elk: {}}
 
 volumes:
   elasticsearch_data:
@@ -196,3 +196,13 @@ configs:
     file: filebeat.yml
   ls_config:
     file: $PWD/logstash/config/logstash.yml
+    
+networks:
+  elk:
+    driver: overlay
+    attachable: true
+    driver_opts:
+      encrypted: "true"
+    ipam:
+      config:
+      - subnet: 70.28.0.0/16
