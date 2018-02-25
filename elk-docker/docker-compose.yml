@@ -96,7 +96,7 @@ services:
   filebeat:
     image: docker.elastic.co/beats/filebeat:${TAG}
     # disable strict permission checks
-    # command: ["--strict.perms=false"]
+    command: ["--strict.perms=false"]
     ports:
       - "5555:8080"
     volumes:
