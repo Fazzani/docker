@@ -18,6 +18,7 @@
   - [ ] WebClient    scale on 2 instances
   - [ ] Batch
   - [ ] Broker
+- [ ] DNS configuration for all applications
 
 ## Others
 
