@@ -96,7 +96,8 @@ services:
   filebeat:
     image: docker.elastic.co/beats/filebeat:${TAG}
     # disable strict permission checks
-    command: ["--strict.perms=false"]
+    # command: ["--strict.perms=false"]
+    user: root
     volumes:
       - filebeat_webgrab_sitepack:/usr/share/sitepack/
       - filebeat_logs:/usr/share/filebeat/logs/
