@@ -58,9 +58,9 @@ services:
     #     target: /usr/share/logstash/config/logstash.yml
     #     mode: 0440
     environment:
-      - ELASTICSEARCH_URL=http://elasticsearch:${ELASTICSEARCH_PORT}
-      - ELASTICSEARCH_USERNAME=${ELASTICSEARCH_USERNAME}
-      - ELASTIC_PASSWORD=${ELASTIC_PASSWORD}
+      - ELASTICSEARCH_URL="http://elasticsearch:${ELASTICSEARCH_PORT}"
+      - ELASTICSEARCH_USERNAME="${ELASTICSEARCH_USERNAME}"
+      - ELASTIC_PASSWORD="${ELASTIC_PASSWORD}"
     #   - 'xpack.monitoring.elasticsearch.password=${ELASTIC_PASSWORD}'
     #   - 'xpack.monitoring.elasticsearch.username=${ELASTICSEARCH_USERNAME}'
     #   - 'xpack.monitoring.elasticsearch.url="http://elasticsearch:9200"'
