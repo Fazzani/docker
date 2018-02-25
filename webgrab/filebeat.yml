@@ -28,14 +28,14 @@ filebeat.config.modules:
 # Configure what output to use when sending the data collected by the beat.
 
 #-------------------------- Elasticsearch output ------------------------------
-output.elasticsearch:
-  # Array of hosts to connect to.
-  hosts: ["elasticsearch:9200"]
+# output.elasticsearch:
+#   # Array of hosts to connect to.
+#   hosts: ["elasticsearch:9200"]
 
-  # Optional protocol and basic auth credentials.
-  #protocol: "https"
-  username: "${ELASTICSEARCH_USERNAME}"
-  password: "${ELASTIC_PASSWORD}"
+#   # Optional protocol and basic auth credentials.
+#   #protocol: "https"
+#   username: "${ELASTICSEARCH_USERNAME}"
+#   password: "${ELASTIC_PASSWORD}"
 
 #----------------------------- Logstash output --------------------------------
 output.logstash:
