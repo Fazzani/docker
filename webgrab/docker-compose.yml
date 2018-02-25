@@ -44,7 +44,7 @@ services:
      - source: fb_config
        target: /usr/share/filebeat/filebeat.yml
     networks:
-      - elk
+      - elk_elk
     deploy:
       restart_policy:
         condition: on-failure
@@ -86,5 +86,5 @@ volumes:
       o: "addr=18.194.42.216,nolock,soft,rw"
       device: ":/webgrab_volume/filebeat/logs"
 networks:
-  elk:
+  elk_elk:
     external: true
