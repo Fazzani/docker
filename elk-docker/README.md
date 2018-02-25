@@ -2,7 +2,7 @@
 
 ## services swarm to install
 
-- [ ] MySQL and restore data
+- [ ] [MariaDb][docker_mariadb] and restore data
 - [ ] RabbitMQ scale on 2 instances
 - [ ] Elk and Filebeat (elastic data scaled on 2 instances) [ex 1][ex_elk2] [ex 2][ex_elk] [ex 3][elk_3]
   - [x] [logstash config][link_logstash_config]
@@ -72,3 +72,4 @@ docker-machine ssh agent2 sudo sysctl -w vm.max_map_count=262144
 [elk_3]:https://github.com/elastic/examples/blob/master/Miscellaneous/docker/full_stack_example/docker-compose-linux.yml
 [elastic_off_guide]:https://www.elastic.co/guide/en/elasticsearch/reference/current/docker.html
 [elastic_compose_ref]:https://github.com/elastic/examples/blob/master/Miscellaneous/docker/full_stack_example/docker-compose-linux.yml
+[docker_mariadb]:https://docs.docker.com/samples/library/mariadb
