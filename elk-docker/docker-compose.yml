@@ -151,7 +151,7 @@ networks:
     ipam:
       config:
       - subnet: 70.28.0.0/16
-      gateway: 70.28.5.254
+      - gateway: 70.28.5.254
 
 volumes:
   elasticsearch_data:
