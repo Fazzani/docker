@@ -128,8 +128,7 @@ services:
         window: 120s
       placement:
         constraints:
-          - node.role == worker
-          - node.hostname == gcp-1
+          - node.hostname == synker.machine.arub1
     depends_on: 
         - elasticsearch
         - logstash
