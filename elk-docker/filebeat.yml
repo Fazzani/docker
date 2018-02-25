@@ -1,14 +1,14 @@
 filebeat.prospectors:
--
-      paths:
-        - /usr/share/sitepack/**/*.xml
-      type: log
-      tail_files: false
-      scan_frequency: 5s
-      multiline:
-        pattern: '<channel'
-        negate: true
-        match: after
+- paths:
+   - /usr/share/sitepack/**/*.xml
+ type: log
+ tags: ["sitepack"]
+ tail_files: false
+ #scan_frequency: 10m
+ multiline:
+   pattern: '<channel'
+   negate: true
+   match: after
 
 output.logstash:
     hosts: ["logstash:5045"]
