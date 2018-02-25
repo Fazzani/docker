@@ -98,6 +98,8 @@ services:
     # disable strict permission checks
     # command: ["--strict.perms=false"]
     user: root
+    ports:
+      - "8080:8080"
     volumes:
       - filebeat_webgrab_sitepack:/usr/share/sitepack/
       - filebeat_logs:/usr/share/filebeat/logs/
