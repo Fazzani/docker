@@ -13,5 +13,6 @@ filebeat.prospectors:
 output.logstash:
     hosts: ["logstash:5045"]
     worker: 1
+    bulk_max_size: 1024
 console:
     pretty: true
