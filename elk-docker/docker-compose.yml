@@ -145,15 +145,7 @@ services:
           - node.role == manager
           - node.labels.size == small
 
-networks:
-  elk:
-    driver: overlay
-    attachable: true
-    driver_opts:
-      encrypted: "true"
-    ipam:
-      config:
-      - subnet: 70.28.0.0/16
+networks: {elk: {}}
 
 volumes:
   elasticsearch_data:
