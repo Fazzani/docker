@@ -135,8 +135,6 @@ volumes:
       device: ":/webgrab_volume/logstash/log"
 
 configs:
-  fb_config:
-    file: filebeat.yml
   ls_config:
     file: $PWD/logstash/config/logstash.yml
 
