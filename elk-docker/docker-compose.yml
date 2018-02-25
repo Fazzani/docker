@@ -68,7 +68,6 @@ services:
     ports:
       - "12201:12201/udp"
       - "9600:9600"
-      - "5045:5045"
     networks:
       - elk
     volumes:
@@ -77,11 +76,6 @@ services:
       - logstash_data:/var/lib/logstash
       - logstash_log:/var/log/logstash
     deploy:
-      mode: replicated
-      replicas: 2
-      update_config:
-        parallelism: 1
-        delay: 10s
       restart_policy:
         condition: on-failure
         delay: 3m
