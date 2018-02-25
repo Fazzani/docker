@@ -129,7 +129,7 @@ services:
       placement:
         constraints:
           - node.role == worker
-          - node.hostname == master
+          - node.hostname == synker.machine.arub1
     depends_on: 
         - elasticsearch
         - logstash
