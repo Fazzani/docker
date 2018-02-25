@@ -6,7 +6,7 @@
 - [ ] RabbitMQ scale on 2 instances
 - [ ] Elk and Filebeat (elastic data scaled on 2 instances) [ex 1][ex_elk2] [ex 2][ex_elk] [ex 3][elk_3]
   - [x] [logstash config][link_logstash_config]
-  - [ ] [Elastic config][elastic_off_guide]
+  - [ ] [Elastic config][elastic_off_guide] [elastic docker compose example][elastic_compose_ref]
 - [x] WebGrab Synker from commands [docker version](https://github.com/linuxserver/docker-webgrabplus)
 - [ ] [Dockbeat](https://github.com/Ingensi/dockbeat) to monitor and log docker deamon into elasticsearch
 - [ ] Synker
@@ -71,3 +71,4 @@ docker-machine ssh agent2 sudo sysctl -w vm.max_map_count=262144
 [NetShare]:http://netshare.containx.io/docs/getting-started
 [elk_3]:https://github.com/elastic/examples/blob/master/Miscellaneous/docker/full_stack_example/docker-compose-linux.yml
 [elastic_off_guide]:https://www.elastic.co/guide/en/elasticsearch/reference/current/docker.html
+[elastic_compose_ref]:https://github.com/elastic/examples/blob/master/Miscellaneous/docker/full_stack_example/docker-compose-linux.yml
