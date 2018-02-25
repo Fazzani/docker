@@ -12,7 +12,7 @@ services:
     volumes:
       - elasticsearch_data:/usr/share/elasticsearch/data
     networks:
-      - elk-2
+      - elk
     ports:
       - ${ELASTICSEARCH_PORT}:9200
     deploy:
@@ -36,7 +36,7 @@ services:
       - ELASTICSEARCH_USERNAME=${ELASTICSEARCH_USERNAME}
       - ELASTICSEARCH_PASSWORD=${ELASTIC_PASSWORD}
     networks:
-      - elk-2
+      - elk
     deploy:
       mode: replicated
       replicas: 1
@@ -69,7 +69,7 @@ services:
       - "12201:12201/udp"
       - "9600:9600"
     networks:
-      - elk-2
+      - elk
     volumes:
       - logstash_config:/usr/share/logstash/config
       - logstash_pipeline:/usr/share/logstash/pipeline
@@ -114,7 +114,7 @@ services:
      - source: fb_config
        target: /usr/share/filebeat/filebeat.yml
     networks:
-      - elk-2
+      - elk
     deploy:
       restart_policy:
         condition: on-failure
@@ -143,10 +143,13 @@ services:
           - node.labels.size == small
 
 networks:
-  elk-2:
+  elk:
     driver: overlay
+    subnet: 10.11.0.0/16
+    attachable: true
     driver_opts:
       encrypted: "true"
+      
 
 volumes:
   elasticsearch_data:
