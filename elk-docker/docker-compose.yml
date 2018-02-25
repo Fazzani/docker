@@ -98,7 +98,7 @@ services:
     command: ["--strict.perms=false"]
     volumes:
       - filebeat_webgrab_sitepack:/usr/share/sitepack/:ro
-      - filebeat_logs:/usr/share/filebeat/logs/:ro
+      - filebeat_logs:/usr/share/filebeat/logs/
       #- /var/run/docker.sock:/var/run/docker.sock
       # This is needed for filebeat to load container log path as specified in filebeat.yml
       #- /var/lib/docker/containers/:/var/lib/docker/containers/:ro
