@@ -16,7 +16,7 @@ services:
           - node.role == worker
           - node.hostname == synker.machine.arub1
 
-filebeat:
+  filebeat:
     image: docker.elastic.co/beats/filebeat:${TAG}
      # Need to override user so we can access the log files, and docker.sock
     user: root
