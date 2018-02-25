@@ -68,6 +68,7 @@ services:
     ports:
       - "12201:12201/udp"
       - "9600:9600"
+      - "5045:5045"
     networks:
       - elk
     volumes:
