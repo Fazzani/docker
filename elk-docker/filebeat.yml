@@ -4,7 +4,7 @@ filebeat.prospectors:
         - /usr/share/sitepack/**/*.xml
       type: log
       tail_files: false
-      scan_frequency: 10m
+      scan_frequency: 5s
       multiline:
         pattern: '<channel'
         negate: true
