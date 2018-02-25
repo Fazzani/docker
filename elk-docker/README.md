@@ -2,29 +2,29 @@
 
 ## services swarm to install
 
-- [ ] Emby
-- [ ] Rancher
-- [ ] Elk and Filebeat (elastic data scaled on 2 instances) [ex 1][ex_elk2] [ex 2][ex_elk] [ex 3][elk_3]
-  - [ ] [logstash config][link_logstash_config]
-- [ ] MySQL
-- [ ] Reverse proxy and LB [traefik][ex_traefik]
+- [ ] MySQL and restore data
 - [ ] RabbitMQ scale on 2 instances
+- [ ] Elk and Filebeat (elastic data scaled on 2 instances) [ex 1][ex_elk2] [ex 2][ex_elk] [ex 3][elk_3]
+  - [x] [logstash config][link_logstash_config]
+  - [ ] [Elastic config][elastic_off_guide]
 - [x] WebGrab Synker from commands [docker version](https://github.com/linuxserver/docker-webgrabplus)
-- [ ] Redis
 - [ ] [Dockbeat](https://github.com/Ingensi/dockbeat) to monitor and log docker deamon into elasticsearch
-- [ ] Install [Tvheadend]
 - [ ] Synker
   - [ ] WebApi       scale on 2 instances
   - [ ] WebClient    scale on 2 instances
   - [ ] Batch
   - [ ] Broker
 - [ ] DNS configuration for all applications
+- [ ] Reverse proxy and LB [traefik][ex_traefik]
+- [ ] Fix auto deploy for appveyor and travis ci
+- [ ] Emby
+- [ ] Rancher
+- [ ] Redis
+- [ ] Install [Tvheadend]
 
 ## Others
 
 - [ ] Restore crontab and incrontab
-- [ ] Restore Synker database
-- [ ] Fix auto deploy for appveyor and travis ci
 - [ ] Rex-ray (google cloud storage 5G, Ceph, GlusterFS, Network File System (NFS))
 - [ ] SSL Elk communication AND [keystore][keystore_logstash]
 - [x] Restore Filebeat and Logstash configurations
@@ -70,3 +70,4 @@ docker-machine ssh agent2 sudo sysctl -w vm.max_map_count=262144
 [keystore_logstash]:https://www.elastic.co/guide/en/logstash/current/keystore.html
 [NetShare]:http://netshare.containx.io/docs/getting-started
 [elk_3]:https://github.com/elastic/examples/blob/master/Miscellaneous/docker/full_stack_example/docker-compose-linux.yml
+[elastic_off_guide]:https://www.elastic.co/guide/en/elasticsearch/reference/current/docker.html
