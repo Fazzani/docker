@@ -14,7 +14,6 @@ services:
       placement:
         constraints: 
           - node.role == worker
-          - node.hostname == synker.machine.arub1
 
   filebeat:
     image: docker.elastic.co/beats/filebeat:${TAG}
