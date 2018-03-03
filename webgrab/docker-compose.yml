@@ -61,27 +61,27 @@ volumes:
   config:
     driver_opts:
       type: "nfs"
-      o: "nolock,soft,rw,addr=18.194.42.216"
+      o: "nolock,soft,rw,addr=35.156.117.97"
       device: ":/webgrab_volume/webgrab/config"
   data:
     driver_opts:
       type: "nfs"
-      o: "nolock,soft,rw,addr=18.194.42.216"
+      o: "nolock,soft,rw,addr=35.156.117.97"
       device: ":/webgrab_volume/webgrab/data"
   filebeat_webgrab_sitepack:
     driver_opts:
       type: "nfs"
-      o: "nolock,soft,rw,addr=18.194.42.216"
+      o: "nolock,soft,rw,addr=35.156.117.97"
       device: ":/webgrab_volume/webgrab/config/siteini.pack"
   filebeat_data:
     driver_opts:
       type: "nfs"
-      o: "addr=18.194.42.216,nolock,soft,rw"
+      o: "addr=35.156.117.97,nolock,soft,rw"
       device: ":/webgrab_volume/filebeat/data"
   filebeat_logs:
     driver_opts:
       type: "nfs"
-      o: "addr=18.194.42.216,nolock,soft,rw"
+      o: "addr=35.156.117.97,nolock,soft,rw"
       device: ":/webgrab_volume/filebeat/logs"
 networks:
   elk_elk:
