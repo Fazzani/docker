@@ -15,7 +15,7 @@ services:
     ports:
       - "8889:3306"
     networks:
-      - elk_elk
+      - ingress_net_backend
     volumes:
       - mysql-data:/var/lib/mysql
     secrets:
@@ -34,5 +34,5 @@ secrets:
   mysql_root_password:
     file: .secrets/mysql_root_password
 networks:
-  elk_elk:
+  ingress_net_backend:
     external: true

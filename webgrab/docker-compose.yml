@@ -43,7 +43,7 @@ services:
      - source: fb_config
        target: /usr/share/filebeat/filebeat.yml
     networks:
-      - elk_elk
+      - ingress_net_backend
     deploy:
       restart_policy:
         condition: on-failure
@@ -84,7 +84,7 @@ volumes:
       o: "addr=35.156.117.97,nolock,soft,rw"
       device: ":/webgrab_volume/filebeat/logs"
 networks:
-  elk_elk:
+  ingress_net_backend:
     external: true
 
 configs:
